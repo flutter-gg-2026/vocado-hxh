@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'routers.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:vocado/features/login/presentation/pages/login_feature_screen.dart';
-import 'package:vocado/features/login/presentation/cubit/login_cubit.dart';
 import 'package:vocado/features/auth/presentation/pages/auth_feature_screen.dart';
 import 'package:vocado/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:vocado/features/task_creator/presentation/pages/task_creator_feature_screen.dart';
@@ -27,14 +25,6 @@ class AppRouter {
         }, // SplashScreen
       ),
     
-  GoRoute(
-    path: Routes.login,
-    builder: (context, state) => BlocProvider(
-          create: (context) => LoginCubit(GetIt.I.get()),
-          child: const LoginFeatureScreen(),
-        ),
-  ),
-
   GoRoute(
     path: Routes.auth,
     builder: (context, state) => BlocProvider(
