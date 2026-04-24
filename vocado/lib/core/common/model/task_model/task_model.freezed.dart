@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TaskModel {
 
- String get id; String get title; String get assignee; String get dueDate; String get status;
+ int get id; String get title; String get assignee; String get dueDate; String get status;
 /// Create a copy of TaskModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $TaskModelCopyWith<$Res>  {
   factory $TaskModelCopyWith(TaskModel value, $Res Function(TaskModel) _then) = _$TaskModelCopyWithImpl;
 @useResult
 $Res call({
- String id, String title, String assignee, String dueDate, String status
+ int id, String title, String assignee, String dueDate, String status
 });
 
 
@@ -68,7 +68,7 @@ class _$TaskModelCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = null,Object? assignee = null,Object? dueDate = null,Object? status = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as int,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,assignee: null == assignee ? _self.assignee : assignee // ignore: cast_nullable_to_non_nullable
 as String,dueDate: null == dueDate ? _self.dueDate : dueDate // ignore: cast_nullable_to_non_nullable
 as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
@@ -157,7 +157,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String title,  String assignee,  String dueDate,  String status)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String title,  String assignee,  String dueDate,  String status)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _TaskModel() when $default != null:
 return $default(_that.id,_that.title,_that.assignee,_that.dueDate,_that.status);case _:
@@ -178,7 +178,7 @@ return $default(_that.id,_that.title,_that.assignee,_that.dueDate,_that.status);
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String title,  String assignee,  String dueDate,  String status)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String title,  String assignee,  String dueDate,  String status)  $default,) {final _that = this;
 switch (_that) {
 case _TaskModel():
 return $default(_that.id,_that.title,_that.assignee,_that.dueDate,_that.status);case _:
@@ -198,7 +198,7 @@ return $default(_that.id,_that.title,_that.assignee,_that.dueDate,_that.status);
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String title,  String assignee,  String dueDate,  String status)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String title,  String assignee,  String dueDate,  String status)?  $default,) {final _that = this;
 switch (_that) {
 case _TaskModel() when $default != null:
 return $default(_that.id,_that.title,_that.assignee,_that.dueDate,_that.status);case _:
@@ -216,7 +216,7 @@ class _TaskModel implements TaskModel {
   const _TaskModel({required this.id, required this.title, required this.assignee, required this.dueDate, required this.status});
   factory _TaskModel.fromJson(Map<String, dynamic> json) => _$TaskModelFromJson(json);
 
-@override final  String id;
+@override final  int id;
 @override final  String title;
 @override final  String assignee;
 @override final  String dueDate;
@@ -255,7 +255,7 @@ abstract mixin class _$TaskModelCopyWith<$Res> implements $TaskModelCopyWith<$Re
   factory _$TaskModelCopyWith(_TaskModel value, $Res Function(_TaskModel) _then) = __$TaskModelCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String title, String assignee, String dueDate, String status
+ int id, String title, String assignee, String dueDate, String status
 });
 
 
@@ -275,7 +275,7 @@ class __$TaskModelCopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = null,Object? assignee = null,Object? dueDate = null,Object? status = null,}) {
   return _then(_TaskModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as int,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,assignee: null == assignee ? _self.assignee : assignee // ignore: cast_nullable_to_non_nullable
 as String,dueDate: null == dueDate ? _self.dueDate : dueDate // ignore: cast_nullable_to_non_nullable
 as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable

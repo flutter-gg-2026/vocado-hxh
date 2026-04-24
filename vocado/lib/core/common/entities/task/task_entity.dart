@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 class TaskEntity extends Equatable {
   
-  final String id;
+  final int id;
   final String title;
   final String assignee;
   final String dueDate;
