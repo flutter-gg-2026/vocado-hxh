@@ -5,11 +5,12 @@ part 'task_model.g.dart';
 
 @freezed
 abstract class TaskModel with _$TaskModel {
+  @JsonSerializable(fieldRename: .snake)
   const factory TaskModel({
     required int id,
     required String title,
     required String assignee,
-    required String dueDate,
+    required DateTime dueDate,
     required String status,
   }) = _TaskModel;
 

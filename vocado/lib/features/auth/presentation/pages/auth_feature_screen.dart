@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gap/gap.dart';
+import 'package:sizer/sizer.dart';
 import 'package:vocado/core/extensions/context_extensions.dart';
 import 'package:vocado/core/navigation/routers.dart';
 import 'package:vocado/core/utils/validators.dart';
@@ -28,7 +29,7 @@ class AuthFeatureScreen extends HookWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(20.0),
             child: BlocListener<AuthCubit, AuthState>(
               listener: (context, state) {
                 context.hideLoading();
@@ -39,7 +40,7 @@ class AuthFeatureScreen extends HookWidget {
 
                   // Success state
                   case AuthSuccessState _:
-                    context.go(Routes.taskCreator);
+                    context.go(Routes.taskViewer);
 
                   // Error state
                   case AuthErrorState _:
@@ -49,8 +50,8 @@ class AuthFeatureScreen extends HookWidget {
               child: Form(
                 key: formKey,
                 child: Column(
-                  mainAxisAlignment: .center,
                   children: [
+                    Gap(30.sh),
                     // App title
                     Text.rich(
                       textAlign: .center,

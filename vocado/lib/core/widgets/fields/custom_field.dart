@@ -25,11 +25,11 @@ class CustomTextField extends StatelessWidget {
       mainAxisAlignment: .start,
       crossAxisAlignment: .start,
       children: [
-        Text(title, style: theme.textTheme.titleLarge),
+        Text(title, style: theme.textTheme.labelLarge),
         Gap(5),
         TextFormField(
           cursorColor: theme.colorScheme.onPrimary,
-          style: theme.textTheme.bodyLarge,
+          style: theme.textTheme.labelLarge,
           controller: controller,
           obscureText: obscureText,
           validator: validator,
@@ -40,7 +40,7 @@ class CustomTextField extends StatelessWidget {
               vertical: 14.0,
             ),
             hintText: hintText,
-            hintStyle: theme.textTheme.bodyLarge?.copyWith(
+            hintStyle: theme.textTheme.labelLarge?.copyWith(
               color: AppColors.textHint,
             ),
             focusedBorder: OutlineInputBorder(

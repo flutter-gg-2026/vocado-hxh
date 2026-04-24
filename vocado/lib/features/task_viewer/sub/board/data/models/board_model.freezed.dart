@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'task_viewer_model.dart';
+part of 'board_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,22 +13,22 @@ part of 'task_viewer_model.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$TaskViewerModel {
+mixin _$BoardModel {
 
  int get id; String get firstName; String get lastName;
-/// Create a copy of TaskViewerModel
+/// Create a copy of BoardModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$TaskViewerModelCopyWith<TaskViewerModel> get copyWith => _$TaskViewerModelCopyWithImpl<TaskViewerModel>(this as TaskViewerModel, _$identity);
+$BoardModelCopyWith<BoardModel> get copyWith => _$BoardModelCopyWithImpl<BoardModel>(this as BoardModel, _$identity);
 
-  /// Serializes this TaskViewerModel to a JSON map.
+  /// Serializes this BoardModel to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TaskViewerModel&&(identical(other.id, id) || other.id == id)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BoardModel&&(identical(other.id, id) || other.id == id)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -37,15 +37,15 @@ int get hashCode => Object.hash(runtimeType,id,firstName,lastName);
 
 @override
 String toString() {
-  return 'TaskViewerModel(id: $id, firstName: $firstName, lastName: $lastName)';
+  return 'BoardModel(id: $id, firstName: $firstName, lastName: $lastName)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $TaskViewerModelCopyWith<$Res>  {
-  factory $TaskViewerModelCopyWith(TaskViewerModel value, $Res Function(TaskViewerModel) _then) = _$TaskViewerModelCopyWithImpl;
+abstract mixin class $BoardModelCopyWith<$Res>  {
+  factory $BoardModelCopyWith(BoardModel value, $Res Function(BoardModel) _then) = _$BoardModelCopyWithImpl;
 @useResult
 $Res call({
  int id, String firstName, String lastName
@@ -56,14 +56,14 @@ $Res call({
 
 }
 /// @nodoc
-class _$TaskViewerModelCopyWithImpl<$Res>
-    implements $TaskViewerModelCopyWith<$Res> {
-  _$TaskViewerModelCopyWithImpl(this._self, this._then);
+class _$BoardModelCopyWithImpl<$Res>
+    implements $BoardModelCopyWith<$Res> {
+  _$BoardModelCopyWithImpl(this._self, this._then);
 
-  final TaskViewerModel _self;
-  final $Res Function(TaskViewerModel) _then;
+  final BoardModel _self;
+  final $Res Function(BoardModel) _then;
 
-/// Create a copy of TaskViewerModel
+/// Create a copy of BoardModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? firstName = null,Object? lastName = null,}) {
   return _then(_self.copyWith(
@@ -77,8 +77,8 @@ as String,
 }
 
 
-/// Adds pattern-matching-related methods to [TaskViewerModel].
-extension TaskViewerModelPatterns on TaskViewerModel {
+/// Adds pattern-matching-related methods to [BoardModel].
+extension BoardModelPatterns on BoardModel {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -91,10 +91,10 @@ extension TaskViewerModelPatterns on TaskViewerModel {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _TaskViewerModel value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _BoardModel value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _TaskViewerModel() when $default != null:
+case _BoardModel() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -113,10 +113,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _TaskViewerModel value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _BoardModel value)  $default,){
 final _that = this;
 switch (_that) {
-case _TaskViewerModel():
+case _BoardModel():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -134,10 +134,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _TaskViewerModel value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _BoardModel value)?  $default,){
 final _that = this;
 switch (_that) {
-case _TaskViewerModel() when $default != null:
+case _BoardModel() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -157,7 +157,7 @@ return $default(_that);case _:
 
 @optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String firstName,  String lastName)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _TaskViewerModel() when $default != null:
+case _BoardModel() when $default != null:
 return $default(_that.id,_that.firstName,_that.lastName);case _:
   return orElse();
 
@@ -178,7 +178,7 @@ return $default(_that.id,_that.firstName,_that.lastName);case _:
 
 @optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String firstName,  String lastName)  $default,) {final _that = this;
 switch (_that) {
-case _TaskViewerModel():
+case _BoardModel():
 return $default(_that.id,_that.firstName,_that.lastName);case _:
   throw StateError('Unexpected subclass');
 
@@ -198,7 +198,7 @@ return $default(_that.id,_that.firstName,_that.lastName);case _:
 
 @optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String firstName,  String lastName)?  $default,) {final _that = this;
 switch (_that) {
-case _TaskViewerModel() when $default != null:
+case _BoardModel() when $default != null:
 return $default(_that.id,_that.firstName,_that.lastName);case _:
   return null;
 
@@ -210,28 +210,28 @@ return $default(_that.id,_that.firstName,_that.lastName);case _:
 /// @nodoc
 @JsonSerializable()
 
-class _TaskViewerModel implements TaskViewerModel {
-  const _TaskViewerModel({required this.id, required this.firstName, required this.lastName});
-  factory _TaskViewerModel.fromJson(Map<String, dynamic> json) => _$TaskViewerModelFromJson(json);
+class _BoardModel implements BoardModel {
+  const _BoardModel({required this.id, required this.firstName, required this.lastName});
+  factory _BoardModel.fromJson(Map<String, dynamic> json) => _$BoardModelFromJson(json);
 
 @override final  int id;
 @override final  String firstName;
 @override final  String lastName;
 
-/// Create a copy of TaskViewerModel
+/// Create a copy of BoardModel
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$TaskViewerModelCopyWith<_TaskViewerModel> get copyWith => __$TaskViewerModelCopyWithImpl<_TaskViewerModel>(this, _$identity);
+_$BoardModelCopyWith<_BoardModel> get copyWith => __$BoardModelCopyWithImpl<_BoardModel>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$TaskViewerModelToJson(this, );
+  return _$BoardModelToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TaskViewerModel&&(identical(other.id, id) || other.id == id)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BoardModel&&(identical(other.id, id) || other.id == id)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -240,15 +240,15 @@ int get hashCode => Object.hash(runtimeType,id,firstName,lastName);
 
 @override
 String toString() {
-  return 'TaskViewerModel(id: $id, firstName: $firstName, lastName: $lastName)';
+  return 'BoardModel(id: $id, firstName: $firstName, lastName: $lastName)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$TaskViewerModelCopyWith<$Res> implements $TaskViewerModelCopyWith<$Res> {
-  factory _$TaskViewerModelCopyWith(_TaskViewerModel value, $Res Function(_TaskViewerModel) _then) = __$TaskViewerModelCopyWithImpl;
+abstract mixin class _$BoardModelCopyWith<$Res> implements $BoardModelCopyWith<$Res> {
+  factory _$BoardModelCopyWith(_BoardModel value, $Res Function(_BoardModel) _then) = __$BoardModelCopyWithImpl;
 @override @useResult
 $Res call({
  int id, String firstName, String lastName
@@ -259,17 +259,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$TaskViewerModelCopyWithImpl<$Res>
-    implements _$TaskViewerModelCopyWith<$Res> {
-  __$TaskViewerModelCopyWithImpl(this._self, this._then);
+class __$BoardModelCopyWithImpl<$Res>
+    implements _$BoardModelCopyWith<$Res> {
+  __$BoardModelCopyWithImpl(this._self, this._then);
 
-  final _TaskViewerModel _self;
-  final $Res Function(_TaskViewerModel) _then;
+  final _BoardModel _self;
+  final $Res Function(_BoardModel) _then;
 
-/// Create a copy of TaskViewerModel
+/// Create a copy of BoardModel
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? firstName = null,Object? lastName = null,}) {
-  return _then(_TaskViewerModel(
+  return _then(_BoardModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
 as String,lastName: null == lastName ? _self.lastName : lastName // ignore: cast_nullable_to_non_nullable

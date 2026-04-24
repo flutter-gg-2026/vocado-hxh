@@ -19,6 +19,7 @@ dependencies:
   flutter_dotenv: ^6.0.1
   flutter_hooks: ^0.21.3+1
   flutter_secure_storage: ^10.0.0
+  fpdart: ^1.2.0
   freezed_annotation: ^3.1.0
   gap: ^3.0.1
   get_it: ^9.2.1

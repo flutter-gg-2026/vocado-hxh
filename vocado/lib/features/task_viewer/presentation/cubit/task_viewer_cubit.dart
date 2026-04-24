@@ -9,12 +9,13 @@ class TaskViewerCubit extends Cubit<TaskViewerState> {
 
   Future<void> getTaskViewerMethod() async {
     final result = await _taskViewerUseCase.getTaskViewer();
-    result.when(
-      (success) {
-        //here is when success result
+    result.fold(
+      (onleft) {
+        emit(TaskViewerErrorState(message: onleft.message));
+
       },
-      (whenError) {
-       //here is when error result
+      (onright) {
+        emit(TaskViewerSuccessState());
       },
     );
   }

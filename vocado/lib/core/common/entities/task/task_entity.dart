@@ -5,7 +5,7 @@ class TaskEntity extends Equatable {
   final int id;
   final String title;
   final String assignee;
-  final String dueDate;
+  final DateTime dueDate;
   final String status;
 
   const TaskEntity({

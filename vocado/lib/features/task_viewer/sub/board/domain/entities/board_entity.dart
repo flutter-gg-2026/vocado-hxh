@@ -1,11 +1,11 @@
 import 'package:equatable/equatable.dart';
 
-class TaskViewerEntity extends Equatable {
+class BoardEntity extends Equatable {
   final int id;
   final String firstName;
   final String lastName;
 
-  const TaskViewerEntity({
+  const BoardEntity({
     required this.id,
     required this.firstName,
     required this.lastName,

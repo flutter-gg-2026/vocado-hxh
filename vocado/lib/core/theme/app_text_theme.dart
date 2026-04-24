@@ -26,7 +26,7 @@ abstract class AppTextTheme {
     titleLarge: TextStyle(
       fontSize: 18,
       fontWeight: FontWeight.w600,
-      color: AppColors.textHint,
+      color: AppColors.textPrimary,
     ),
     bodyLarge: TextStyle(
       fontSize: 16,
@@ -40,6 +40,20 @@ abstract class AppTextTheme {
     ),
     bodySmall: TextStyle(
       fontSize: 12,
+      fontWeight: FontWeight.normal,
+      color: AppColors.textPrimary,
+    ),
+    labelLarge: TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.normal,
+      color: AppColors.textPrimary,
+    ),
+     labelMedium: TextStyle(
+      fontSize: 12,
+      fontWeight: FontWeight.normal,
+      color: AppColors.textHint,
+    ), labelSmall: TextStyle(
+      fontSize: 11,
       fontWeight: FontWeight.normal,
       color: AppColors.textHint,
     ),
