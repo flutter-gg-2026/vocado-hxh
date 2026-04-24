@@ -1,33 +1,46 @@
 import 'package:injectable/injectable.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:vocado/core/common/model/user_model/user_model.dart';
 import 'package:vocado/core/services/local_keys_service.dart';
+import 'package:vocado/core/services/user_service.dart';
 import 'package:vocado/features/auth/data/models/auth_model.dart';
 import 'package:vocado/core/errors/network_exceptions.dart';
 
-
 abstract class BaseAuthRemoteDataSource {
-  Future<AuthModel> getAuth();
+  Future<void> getAuth({
+      required String email,
+      required String password,
+    });
 }
-
 
 @LazySingleton(as: BaseAuthRemoteDataSource)
 class AuthRemoteDataSource implements BaseAuthRemoteDataSource {
- 
   final SupabaseClient _supabase;
+  final UserService _userService;
   final LocalKeysService _localKeysService;
-  
-  
 
-   AuthRemoteDataSource(this._localKeysService, this._supabase);
+  AuthRemoteDataSource(this._localKeysService, this._supabase,this._userService);
 
-
-
-    @override
-  Future<AuthModel> getAuth() async {
-    try {
-      return AuthModel(id: 1, firstName: "Last Name", lastName: "First Name");
-    } catch (error) {
-     throw FailureExceptions.getException(error);
-    }
+  @override
+  Future<void> getAuth({
+      required String email,
+      required String password,
+    }) async {
+      try {
+        await _supabase.auth.signInWithPassword(
+          password: password,
+          email: email,
+        );
+        final userData = await _supabase
+            .from('users')
+            .select()
+            .eq('id', _supabase.auth.currentUser!.id)
+            .single();
+        final userModel = UserModel.fromJson(userData);
+        _userService.setUser = userModel;
+      } catch (error) {
+        throw FailureExceptions.getException(error);
+      }
+    
   }
 }

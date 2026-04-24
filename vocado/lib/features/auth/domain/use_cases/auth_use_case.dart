@@ -11,7 +11,10 @@ class AuthUseCase {
 
   AuthUseCase(this._repositoryData);
 
-   Future<Result<AuthEntity, Failure>> getAuth() async {
-    return _repositoryData.getAuth();
+   Future<Result<void, Failure>> getAuth({
+      required String email,
+      required String password,
+    }) async {
+    return _repositoryData.getAuth(email: email,password: password);
   }
 }

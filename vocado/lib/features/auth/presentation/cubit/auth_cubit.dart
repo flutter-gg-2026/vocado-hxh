@@ -7,14 +7,17 @@ class AuthCubit extends Cubit<AuthState> {
 
   AuthCubit(this._authUseCase) : super(AuthInitialState());
 
-  Future<void> getAuthMethod() async {
-    final result = await _authUseCase.getAuth();
+  Future<void> getAuthMethod({
+    required String email,
+    required String password,
+  }) async {
+    final result = await _authUseCase.getAuth(email: email, password: password);
     result.when(
       (success) {
-        //here is when success result
+        emit(AuthSuccessState());
       },
       (whenError) {
-       //here is when error result
+        emit(AuthErrorState(message: whenError.message));
       },
     );
   }

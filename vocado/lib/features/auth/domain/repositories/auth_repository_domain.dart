@@ -3,5 +3,8 @@ import 'package:vocado/core/errors/failure.dart';
 import 'package:vocado/features/auth/domain/entities/auth_entity.dart';
 
 abstract class AuthRepositoryDomain {
-    Future<Result<AuthEntity, Failure>> getAuth();
+    Future<Result<void, Failure>> getAuth({
+      required String email,
+      required String password,
+    });
 }

@@ -6,7 +6,9 @@ class Validators {
     if (value == null || value.isEmpty) {
       return 'Email is required';
     }
-    final emailRegex = RegExp(r'^[w-.]+@([w-]+.)+[w-]{2,4}$');
+
+    // Corrected regex with backslashes for word characters (\w)
+    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
     if (!emailRegex.hasMatch(value)) {
       return 'Invalid email address';
     }

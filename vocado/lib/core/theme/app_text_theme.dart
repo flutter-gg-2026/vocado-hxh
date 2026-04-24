@@ -26,7 +26,7 @@ abstract class AppTextTheme {
     titleLarge: TextStyle(
       fontSize: 18,
       fontWeight: FontWeight.w600,
-      color: AppColors.textPrimary,
+      color: AppColors.textHint,
     ),
     bodyLarge: TextStyle(
       fontSize: 16,
@@ -50,4 +50,3 @@ abstract class AppTextTheme {
     displayColor: Colors.white,
   );
 }
-
