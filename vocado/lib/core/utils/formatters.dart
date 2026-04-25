@@ -7,9 +7,9 @@ class Formatters {
   static String formatCurrency(double amount, {String symbol = '\$'}) {
     return '$symbol${amount.toStringAsFixed(2)}';
   }
-
+// Update Format
   static String formatDate(DateTime date) {
-    return DateFormat('yyyy-MM-dd').format(date);
+    return DateFormat('MMM dd, yyyy').format(date);
   }
 
   static String formatDateTime(DateTime dateTime) {

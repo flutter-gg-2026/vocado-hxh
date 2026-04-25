@@ -1,7 +1,8 @@
-import 'package:multiple_result/multiple_result.dart';
+import 'package:fpdart/fpdart.dart';
+import 'package:vocado/core/common/entities/task/task_entity.dart';
 import 'package:vocado/core/errors/failure.dart';
-import 'package:vocado/features/task_viewer/domain/entities/task_viewer_entity.dart';
 
 abstract class TaskViewerRepositoryDomain {
-    Future<Result<TaskViewerEntity, Failure>> getTaskViewer();
+  Future<Either<Failure, List<TaskEntity>>> getTaskViewer();
+  Future<Either<Failure, List<TaskEntity>>> updateTask();
 }

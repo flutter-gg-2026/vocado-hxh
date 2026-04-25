@@ -9,19 +9,34 @@ class TaskViewerCubit extends Cubit<TaskViewerState> {
 
   Future<void> getTaskViewerMethod() async {
     final result = await _taskViewerUseCase.getTaskViewer();
-    result.when(
-      (success) {
-        //here is when success result
+    result.fold(
+      (onleft) {
+        emit(TaskViewerErrorState(message: onleft.message));
       },
-      (whenError) {
-       //here is when error result
+      (onright) {
+        emit(
+          TaskViewerSuccessState(
+            allTasks: onright,
+            newTasks: onright.where((t) => t.status == "New").toList(),
+            lateTasks: onright.where((t) => t.status == "Late").toList(),
+            inProgressTasks: onright
+                .where((t) => t.status == "In Progress")
+                .toList(),
+          ),
+        );
       },
     );
   }
 
-  @override
-  Future<void> close() {
-    //here is when close cubit
-    return super.close();
+  Future<void> updateTaskMethod() async {
+    final result = await _taskViewerUseCase.getTaskViewer();
+    result.fold(
+      (onleft) {
+        emit(TaskViewerErrorState(message: onleft.message));
+      },
+      (onright) {
+        // emit(TaskViewerSuccessState(tasks: onright));
+      },
+    );
   }
 }

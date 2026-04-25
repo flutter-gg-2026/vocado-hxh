@@ -11,8 +11,10 @@ abstract class AppTheme {
     colorScheme: ColorScheme.light(
       primary: AppColors.primary,
       secondary: AppColors.secondary,
+      tertiary: AppColors.disabled,
       surface: AppColors.surface,
       error: AppColors.error,
+      
     ),
     scaffoldBackgroundColor: AppColors.background,
     textTheme: AppTextTheme.lightTextTheme,

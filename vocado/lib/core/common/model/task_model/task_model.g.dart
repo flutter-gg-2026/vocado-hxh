@@ -9,8 +9,8 @@ part of 'task_model.dart';
 _TaskModel _$TaskModelFromJson(Map<String, dynamic> json) => _TaskModel(
   id: (json['id'] as num).toInt(),
   title: json['title'] as String,
-  assignee: json['assignee'] as String,
-  dueDate: json['dueDate'] as String,
+  assignee: json['assignee'] as String?,
+  dueDate: DateTime.parse(json['due_date'] as String),
   status: json['status'] as String,
 );
 
@@ -19,6 +19,6 @@ Map<String, dynamic> _$TaskModelToJson(_TaskModel instance) =>
       'id': instance.id,
       'title': instance.title,
       'assignee': instance.assignee,
-      'dueDate': instance.dueDate,
+      'due_date': instance.dueDate.toIso8601String(),
       'status': instance.status,
     };
