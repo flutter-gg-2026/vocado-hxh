@@ -17,7 +17,7 @@ class Formatters {
   }
 
   static String formatTime(DateTime time) {
-    return DateFormat('HH:mm').format(time);
+    return DateFormat('HH:mm a').format(time);
   }
 
   static String formatPhoneNumber(String phone) {

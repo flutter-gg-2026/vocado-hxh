@@ -14,7 +14,6 @@ abstract class AppTheme {
       tertiary: AppColors.disabled,
       surface: AppColors.surface,
       error: AppColors.error,
-      
     ),
     scaffoldBackgroundColor: AppColors.background,
     textTheme: AppTextTheme.lightTextTheme,
@@ -46,6 +45,7 @@ abstract class AppTheme {
         borderSide: const BorderSide(color: AppColors.primary, width: 2),
       ),
     ),
+
   );
 
   static ThemeData darkTheme = ThemeData(
@@ -62,4 +62,3 @@ abstract class AppTheme {
     textTheme: AppTextTheme.darkTextTheme,
   );
 }
-

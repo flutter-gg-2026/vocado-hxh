@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sizer/sizer.dart';
 import 'package:vocado/core/constants/app_colors.dart';
+import 'package:vocado/core/navigation/routers.dart';
 import 'package:vocado/features/task_viewer/presentation/widgets/cards/in_progress_task_card.dart';
 import 'package:vocado/features/task_viewer/presentation/widgets/cards/late_task_card.dart';
 import 'package:vocado/features/task_viewer/presentation/widgets/cards/new_task_card.dart';
@@ -50,10 +52,14 @@ class TaskViewerFeatureScreen extends StatelessWidget {
                           SectionHeader(
                             taskStatus: "New",
                             taskTotal: state.newTasks.length.toString(),
-                            backgroundColor: theme.colorScheme.secondary.withAlpha(
-                              200,
-                            ),
-                            onPressed: () {},
+                            backgroundColor: theme.colorScheme.secondary
+                                .withAlpha(200),
+                            onPressed: () {
+                              context.push(
+                                Routes.taskBoard,
+                                extra: state.newTasks,
+                              );
+                            },
                           ),
 
                           ConstrainedBox(
@@ -86,7 +92,14 @@ class TaskViewerFeatureScreen extends StatelessWidget {
                             backgroundColor: theme.colorScheme.error.withAlpha(
                               150,
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              print("-----------1.1");
+
+                              context.push(
+                                Routes.taskBoard,
+                                extra: state.lateTasks,
+                              );
+                            },
                           ),
 
                           ConstrainedBox(
@@ -95,7 +108,7 @@ class TaskViewerFeatureScreen extends StatelessWidget {
                               scrollDirection: .horizontal,
                               itemCount: state.lateTasks.length,
                               itemBuilder: (context, index) =>
-                                  LateTaskCard(task: state.allTasks[index]),
+                                  LateTaskCard(task: state.lateTasks[index]),
                             ),
                           ),
                         ],
@@ -117,7 +130,12 @@ class TaskViewerFeatureScreen extends StatelessWidget {
                             taskStatus: "In Progress",
                             taskTotal: state.inProgressTasks.length.toString(),
                             backgroundColor: AppColors.warning.withAlpha(150),
-                            onPressed: () {},
+                            onPressed: () {
+                              context.push(
+                                Routes.taskBoard,
+                                extra: state.inProgressTasks,
+                              );
+                            },
                           ),
 
                           ConstrainedBox(
@@ -126,7 +144,7 @@ class TaskViewerFeatureScreen extends StatelessWidget {
                               itemCount: state.inProgressTasks.length,
                               itemBuilder: (context, index) =>
                                   InProgressTaskCard(
-                                    task: state.allTasks[index],
+                                    task: state.inProgressTasks[index],
                                   ),
                             ),
                           ),

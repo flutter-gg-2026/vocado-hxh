@@ -7,4 +7,5 @@ class Routes {
   static const String error = '/error';
   static const String taskReviw = '/taskReviw';
   static const String taskViewer = '/taskViewer';
+  static const String taskBoard = '/taskBoard';
 }

@@ -1,10 +1,10 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:vocado/core/common/entities/task/task_entity.dart';
-import 'package:vocado/core/services/user_service.dart';
 import 'package:vocado/features/task_creator/presentation/pages/error_screen.dart';
 import 'package:vocado/features/task_creator/presentation/pages/task_review_screen.dart';
 import 'package:vocado/features/task_creator/presentation/pages/voice_screen.dart';
+import 'package:vocado/features/task_viewer/presentation/pages/task_board.dart';
 import 'routers.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +18,7 @@ import 'package:vocado/features/task_viewer/presentation/cubit/task_viewer_cubit
 class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: Routes.auth,
-    
+
     routes: [
       GoRoute(
         path: Routes.splash,
@@ -71,6 +71,18 @@ class AppRouter {
           create: (context) => TaskViewerCubit(GetIt.I.get()),
           child: const TaskViewerFeatureScreen(),
         ),
+      ),
+      GoRoute(
+        path: Routes.taskBoard,
+        builder: (context, state) {
+          final tasks = state.extra as List<TaskEntity>;
+          print("-----------1.2");
+
+          return BlocProvider(
+            create: (context) => TaskViewerCubit(GetIt.I.get()),
+            child: TaskBoard(tasks: tasks),
+          );
+        },
       ),
     ],
 

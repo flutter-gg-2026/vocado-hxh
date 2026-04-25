@@ -11,8 +11,8 @@ class NewTaskCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final taskStatus = {1: "New", 2: "In Progress", 3: "Done", 4: "Late"};
-    int? currentValue;
+    final taskStatus = ["In Progress", "Done", "Late"];
+    String? currentValue;
     return Container(
       height: 45.sizeSW(min: 161, max: 280),
       width: 60.sizeSW(min: 244, max: 388),
@@ -51,15 +51,12 @@ class NewTaskCard extends StatelessWidget {
           DropdownButton(
             hint: Text("Select Task Status"),
             value: currentValue,
-            items: taskStatus.entries
-                .map(
-                  (task) => DropdownMenuItem(
-                    value: task.key,
-                    child: Text(task.value),
-                  ),
-                )
+            borderRadius: BorderRadius.circular(20),
+            
+            items: taskStatus
+                .map((task) => DropdownMenuItem(value: task, child: Text(task)))
                 .toList(),
-            onChanged: (int? value) {
+            onChanged: (String? value) {
               currentValue = value;
             },
           ),
