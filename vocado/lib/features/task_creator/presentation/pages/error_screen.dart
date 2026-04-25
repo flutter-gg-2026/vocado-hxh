@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
+import 'package:vocado/core/navigation/routers.dart';
 import 'package:vocado/features/task_creator/presentation/cubit/task_creator_cubit.dart';
 import 'package:vocado/features/task_creator/presentation/widgets/custom_button.dart';
 
@@ -33,7 +35,11 @@ class ErrorScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 16, color: Colors.black54),
               ),
               Gap(30),
-              CustomButtonPuple(text: "Try again"),
+              CustomButtonPuple(
+              text: "Try again",
+              onPressed: () {
+              context.go(Routes.voice);
+              },),
             ],
           ),
         ),

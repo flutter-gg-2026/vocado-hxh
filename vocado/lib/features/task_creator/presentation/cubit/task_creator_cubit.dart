@@ -7,18 +7,49 @@ class TaskCreatorCubit extends Cubit<TaskCreatorState> {
 
   TaskCreatorCubit(this._taskCreatorUseCase) : super(TaskCreatorInitialState());
 
-  Future<void> getTaskCreatorMethod() async {
-    final result = await _taskCreatorUseCase.getTaskCreator();
-    result.when(
-      (success) {
-        //here is when success result
+  Future<void> startVoiceMethod() async {
+      print("Cubit startVoiceMethod called");
+  emit(TaskRecordingLoadingState());
+    final result = await _taskCreatorUseCase.startVoice();
+
+    result.fold(
+      (failure) {
+        emit(TaskCreatorErrorState(message: failure.message));
       },
-      (whenError) {
-       //here is when error result
+      (success) {
+        emit(TaskRecordingState(start: true));
       },
     );
   }
 
+ Future<void> stopVoiceMethod() async {
+    print("Cubit stopVoiceMethod called");
+  emit(TaskRecordingLoadingState());
+  final result =
+      await _taskCreatorUseCase.stopVoice();
+ print("2️⃣ UseCase returned");
+ 
+  result.fold(
+    (failure) {
+            print("3️⃣ FAILURE: ${failure.message}");
+
+      emit(TaskCreatorErrorState(
+        message: failure.message,
+      ));
+    },
+    (task) {
+       if (task.title.isEmpty) {
+        emit(TaskCreatorErrorState(
+          message: "Empty task returned",
+        ));
+        return;
+      }
+        print("3️⃣ SUCCESS: ${task.title}");
+         emit(TaskCreatedState(task));
+
+    },
+  );
+}
   @override
   Future<void> close() {
     //here is when close cubit

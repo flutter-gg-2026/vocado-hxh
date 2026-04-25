@@ -17,6 +17,7 @@ import 'package:supabase_flutter/supabase_flutter.dart' as _i454;
 
 import '../network/dio_client.dart' as _i667;
 import '../services/local_keys_service.dart' as _i945;
+import '../services/record_service.dart' as _i982;
 import '../services/user_service.dart' as _i381;
 import 'third_part.dart' as _i423;
 
@@ -36,6 +37,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => thirdPartyConfig.flutterSecureStorage,
     );
     gh.lazySingleton<_i667.DioClient>(() => _i667.DioClient());
+    gh.lazySingleton<_i982.RecordService>(() => _i982.RecordService());
     gh.lazySingleton<_i381.UserService>(() => _i381.UserService());
     gh.singleton<_i945.LocalKeysService>(() => _i945.LocalKeysService());
     return this;

@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:vocado/core/common/entities/task/task_entity.dart';
 import 'package:vocado/features/task_creator/presentation/cubit/task_creator_cubit.dart';
 import 'package:vocado/features/task_creator/presentation/widgets/custom_button.dart';
 import 'package:vocado/features/task_creator/presentation/widgets/custom_outline_box.dart';
 
 class TaskReviewScreen extends StatelessWidget {
-  const TaskReviewScreen({super.key});
+  const TaskReviewScreen({super.key, required this.task});
+  final TaskEntity task;
+
   @override
   Widget build(BuildContext context) {
     final _ = context.read<TaskCreatorCubit>();
@@ -46,20 +49,23 @@ class TaskReviewScreen extends StatelessWidget {
             Gap(60),
             Text(
               "Task is:",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
             ),
             Gap(6),
             Text(
-              "update the logic code please",
+              task.title,
               style: TextStyle(fontSize: 15, color: Colors.grey),
             ),
             Gap(30),
-            CustomOutlineBox(text: "Assign To : Amasi Alhazmi"),
+            CustomOutlineBox(text: task.assignee.isEmpty ? "Not assigned" : task.assignee),
             Gap(16),
-            CustomOutlineBox(text: "deadline: 12:00 pm – 22 Apr"),
+            CustomOutlineBox(text: task.dueDate.isEmpty ? "No deadline" : task.dueDate),
             Gap(30),
-                        CustomButtonPuple(text: "Approved")
-
+            CustomButtonPuple(text: "Approved"),
           ],
         ),
       ),

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class CustomButtonPuple extends StatelessWidget {
-  const CustomButtonPuple({super.key, required this.text});
+  const CustomButtonPuple({super.key, required this.text, this.onPressed});
   final String text;
-  
+  final void Function()? onPressed;
+
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +18,7 @@ class CustomButtonPuple extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
         ),
-        onPressed: () {
-        },
+        onPressed: onPressed,
         child: Text(text, style: TextStyle(fontSize: 16)),
       ),
     );
