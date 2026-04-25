@@ -11,16 +11,15 @@ class AuthCubit extends Cubit<AuthState> {
     required String email,
     required String password,
   }) async {
+    emit(AuthLoadingState());
     final result = await _authUseCase.getAuth(email: email, password: password);
     result.when(
       (success) {
-        emit(AuthSuccessState(role:success.role));
+        emit(AuthSuccessState(role: success.role));
       },
       (whenError) {
         emit(AuthErrorState(message: whenError.message));
       },
     );
   }
-
-  
 }

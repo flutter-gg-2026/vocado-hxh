@@ -7,7 +7,7 @@ import 'package:vocado/core/errors/network_exceptions.dart';
 
 abstract class BaseTaskViewerRemoteDataSource {
   Future<List<TaskModel>> getTaskViewer();
-  Future<List<TaskModel>> updateTask();
+  Future<bool> updateTask({required int id, required String newStatus});
 }
 
 @LazySingleton(as: BaseTaskViewerRemoteDataSource)
@@ -43,20 +43,15 @@ class TaskViewerRemoteDataSource implements BaseTaskViewerRemoteDataSource {
   }
 
   @override
-  Future<List<TaskModel>> updateTask() async {
-    List<TaskModel> tasks = [];
+  Future<bool> updateTask({required int id, required String newStatus}) async {
     try {
       final response = await _supabase
           .from("task")
-          .select()
-          .eq("user_id", _userService.getUser!.id);
+          .update({'status': newStatus})
+          .eq("id", id);
+      print("---------------1");
       print(response);
-      if (response.isNotEmpty) {
-        tasks = (response as List)
-            .map((task) => TaskModel.fromJson(task))
-            .toList();
-      }
-      return tasks;
+      return true;
     } catch (error) {
       throw FailureExceptions.getException(error);
     }

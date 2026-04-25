@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:vocado/core/common/entities/task/task_entity.dart';
 import 'package:vocado/core/extensions/font_extensions.dart';
 import 'package:vocado/core/utils/formatters.dart';
+import 'package:vocado/features/task_viewer/presentation/cubit/task_viewer_cubit.dart';
 
 class LateTaskCard extends StatelessWidget {
   const LateTaskCard({super.key, required this.task});
@@ -11,6 +13,7 @@ class LateTaskCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final cubit = context.read<TaskViewerCubit>();
     bool isChecked = false;
     return Container(
       width: 45.sizeSW(min: 161, max: 280),
@@ -25,7 +28,7 @@ class LateTaskCard extends StatelessWidget {
         crossAxisAlignment: .start,
         children: [
           Text(
-            task.status,
+            "Late",
             style: theme.textTheme.titleLarge!.copyWith(
               color: theme.colorScheme.error.withAlpha(100),
             ),
@@ -52,8 +55,15 @@ class LateTaskCard extends StatelessWidget {
               ),
             ],
           ),
-          Checkbox(value: isChecked, onChanged: (value) {}),
-        ],
+ Checkbox(
+          value: isChecked,
+          onChanged: (value) {
+            if (value == true) {
+              isChecked=value!;
+              cubit.updateTaskMethod(id: task.id, newStatus: "Done");
+            }
+          },
+        ),        ],
       ),
     );
   }

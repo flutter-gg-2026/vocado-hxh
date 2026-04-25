@@ -15,7 +15,7 @@ class TaskViewerUseCase {
     return _repositoryData.getTaskViewer();
   }
 
-  Future<Either<Failure, List<TaskEntity>>>updateTask() async {
-    return _repositoryData.getTaskViewer();
+  Future<Either<Failure, bool>>updateTask({required int id,required String newStatus}) async {
+    return _repositoryData.updateTask(id:id,newStatus:newStatus);
   }
 }

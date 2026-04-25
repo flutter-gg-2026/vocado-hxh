@@ -9,6 +9,7 @@ abstract class TaskViewerState extends Equatable {
 }
 
 class TaskViewerInitialState extends TaskViewerState {}
+class TaskViewerLoadingState extends TaskViewerState {}
 
 class TaskViewerSuccessState extends TaskViewerState {
   final List<TaskEntity> allTasks;
@@ -21,8 +22,7 @@ class TaskViewerSuccessState extends TaskViewerState {
     required this.lateTasks,
     required this.inProgressTasks,
   });
-  @override
-  List<Object?> get props => [allTasks, newTasks, lateTasks, inProgressTasks];
+
 }
 
 class TaskViewerErrorState extends TaskViewerState {

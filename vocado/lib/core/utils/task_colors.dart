@@ -4,13 +4,14 @@ import 'package:vocado/core/constants/app_colors.dart';
 class TaskColors {
   TaskColors._();
 
- static final taskColors = {
+  static final taskColors = {
     'New': AppColors.secondary,
-    'Late': AppColors.error,
     'In Progress': AppColors.warning,
   };
 
-  static Color getTaskColor(String status) {
-    return taskColors[status] ?? AppColors.disabled;
+  static Color getTaskColor(String status, DateTime duedate) {
+    return duedate.isBefore(DateTime.now())
+        ? AppColors.error
+        : taskColors[status] ?? AppColors.error;
   }
 }

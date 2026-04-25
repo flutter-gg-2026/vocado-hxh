@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sizer/sizer.dart';
 import 'package:vocado/core/constants/app_colors.dart';
+import 'package:vocado/core/extensions/context_extensions.dart';
 import 'package:vocado/core/navigation/routers.dart';
 import 'package:vocado/features/task_viewer/presentation/widgets/cards/in_progress_task_card.dart';
 import 'package:vocado/features/task_viewer/presentation/widgets/cards/late_task_card.dart';
@@ -46,6 +47,9 @@ class TaskViewerFeatureScreen extends StatelessWidget {
               children: [
                 BlocBuilder<TaskViewerCubit, TaskViewerState>(
                   builder: (context, state) {
+                    if (state is TaskViewerLoadingState) {
+                      Center(child: CircularProgressIndicator());
+                    }
                     if (state is TaskViewerSuccessState) {
                       return Column(
                         children: [
@@ -68,7 +72,7 @@ class TaskViewerFeatureScreen extends StatelessWidget {
                               scrollDirection: .horizontal,
                               itemCount: state.newTasks.length,
                               itemBuilder: (context, index) =>
-                                  NewTaskCard(task: state.allTasks[index]),
+                                  NewTaskCard(task: state.newTasks[index]),
                             ),
                           ),
                         ],
@@ -94,7 +98,6 @@ class TaskViewerFeatureScreen extends StatelessWidget {
                             ),
                             onPressed: () {
                               print("-----------1.1");
-
                               context.push(
                                 Routes.taskBoard,
                                 extra: state.lateTasks,

@@ -11,7 +11,6 @@ class TaskBoard extends StatelessWidget {
   final List<TaskEntity> tasks;
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<TaskViewerCubit>();
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
@@ -35,19 +34,42 @@ class TaskBoard extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: BlocBuilder<TaskViewerCubit,TaskViewerState>(
+          child: BlocBuilder<TaskViewerCubit, TaskViewerState>(
             builder: (context, state) {
-              return ListView.builder(
-              itemCount: tasks.length,
-              itemBuilder: (context, index) => ListCard(
-                task: tasks[index],
-                color: TaskColors.getTaskColor(tasks[index].status),
-               ) );
+              return Column(
+                crossAxisAlignment: .start,
+                children: [
+                  Text.rich(
+                    TextSpan(
+                      text: "${tasks.length.toString()} Tasks",
+                      style: theme.textTheme.titleLarge,
+
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: " Need to be done",
+                          style: theme.textTheme.bodyLarge,
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: tasks.length,
+                    itemBuilder: (context, index) => ListCard(
+                      task: tasks[index],
+                      color: TaskColors.getTaskColor(
+                        tasks[index].status,
+                        tasks[index].dueDate,
+                      ),
+                    ),
+                  ),
+                ],
+              );
             },
           ),
-          ),
         ),
-    
+      ),
     );
   }
 }

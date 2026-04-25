@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:vocado/core/common/entities/task/task_entity.dart';
 import 'package:vocado/core/extensions/font_extensions.dart';
 import 'package:vocado/core/utils/formatters.dart';
+import 'package:vocado/features/task_viewer/presentation/cubit/task_viewer_cubit.dart';
 
 class InProgressTaskCard extends StatelessWidget {
   const InProgressTaskCard({super.key, required this.task});
@@ -10,7 +12,8 @@ class InProgressTaskCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+   final theme = Theme.of(context);
+    final cubit = context.read<TaskViewerCubit>();
     bool isChecked = false;
     return Container(
       height: 20.sizeSW(min: 50, max: 200),
@@ -23,8 +26,8 @@ class InProgressTaskCard extends StatelessWidget {
       child: ListTile(
         title: Text(
           task.title,
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
+          maxLines: 1,
+          overflow: TextOverflow.visible,
           style: theme.textTheme.titleLarge,
           softWrap: true,
         ),
@@ -42,7 +45,15 @@ class InProgressTaskCard extends StatelessWidget {
             ),
           ],
         ),
-        trailing: Checkbox(value: isChecked, onChanged: (value) {}),
+        trailing:  Checkbox(
+          value: isChecked,
+          onChanged: (value) {
+            if (value == true) {
+              isChecked=value!;
+              cubit.updateTaskMethod(id: task.id, newStatus: "Done");
+            }
+          },
+        ),
       ),
     );
   }

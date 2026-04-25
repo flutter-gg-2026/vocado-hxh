@@ -1,5 +1,4 @@
 import 'package:injectable/injectable.dart';
-import 'package:multiple_result/multiple_result.dart';
 import 'package:vocado/core/common/entities/task/task_entity.dart';
 import 'package:vocado/core/common/model/task_model/task_model.dart';
 import 'package:vocado/core/errors/network_exceptions.dart';
@@ -17,10 +16,8 @@ class TaskViewerRepositoryData implements TaskViewerRepositoryDomain {
   Future<Either<Failure, List<TaskEntity>>> getTaskViewer() async {
     try {
       final response = await remoteDataSource.getTaskViewer();
-      print("-------fffffffffff");
 
       final tasks = response.map((task) => task.toEntity()).toList();
-      print("-------fffffffffff");
 
       return Either.right(tasks);
     } catch (error) {
@@ -29,15 +26,12 @@ class TaskViewerRepositoryData implements TaskViewerRepositoryDomain {
   }
 
   @override
-  Future<Either<Failure, List<TaskEntity>>> updateTask() async {
+  Future<Either<Failure, bool>> updateTask({required int id,required String newStatus}) async {
     try {
-      final response = await remoteDataSource.getTaskViewer();
-      print("-------fffffffffff");
+      final response = await remoteDataSource.updateTask(id:id,newStatus:newStatus);
 
-      final tasks = response.map((task) => task.toEntity()).toList();
-      print("-------fffffffffff");
 
-      return Either.right(tasks);
+      return Either.right(response);
     } catch (error) {
       return Either.left(FailureExceptions.getException(error));
     }

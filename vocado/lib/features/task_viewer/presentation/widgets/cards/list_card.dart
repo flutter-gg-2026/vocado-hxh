@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:vocado/core/common/entities/task/task_entity.dart';
 import 'package:vocado/core/extensions/font_extensions.dart';
 import 'package:vocado/core/utils/formatters.dart';
+import 'package:vocado/features/task_viewer/presentation/cubit/task_viewer_cubit.dart';
 
 class ListCard extends StatelessWidget {
   const ListCard({super.key, required this.task, required this.color});
@@ -11,6 +13,7 @@ class ListCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final cubit = context.read<TaskViewerCubit>();
     bool isChecked = false;
     return Container(
       height: 20.sizeSW(min: 50, max: 200),
@@ -23,7 +26,7 @@ class ListCard extends StatelessWidget {
             color: theme.colorScheme.primary.withAlpha(30),
             blurRadius: 3,
             spreadRadius: 0.5,
-            offset: Offset(0, 3)
+            offset: Offset(0, 3),
           ),
         ],
         borderRadius: BorderRadius.circular(20),
@@ -31,9 +34,9 @@ class ListCard extends StatelessWidget {
       child: ListTile(
         title: Text(
           task.title,
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-          style: theme.textTheme.titleLarge,
+          maxLines: 1,
+          overflow: TextOverflow.visible,
+          style: theme.textTheme.titleSmall,
           softWrap: true,
         ),
         subtitle: Row(
@@ -46,11 +49,19 @@ class ListCard extends StatelessWidget {
             Gap(5),
             Text(
               Formatters.formatTime(task.dueDate),
-              style: theme.textTheme.bodyLarge,
+              style: theme.textTheme.bodySmall,
             ),
           ],
         ),
-        trailing: Checkbox(value: isChecked, onChanged: (value) {}),
+        trailing: Checkbox(
+          value: isChecked,
+          onChanged: (value) {
+            if (value == true) {
+              isChecked=value!;
+              cubit.updateTaskMethod(id: task.id, newStatus: "Done");
+            }
+          },
+        ),
       ),
     );
   }
