@@ -50,8 +50,8 @@ class TaskViewerFeatureScreen extends StatelessWidget {
                           SectionHeader(
                             taskStatus: "New",
                             taskTotal: state.newTasks.length.toString(),
-                            backgroundColor: theme.colorScheme.error.withAlpha(
-                              150,
+                            backgroundColor: theme.colorScheme.secondary.withAlpha(
+                              200,
                             ),
                             onPressed: () {},
                           ),
@@ -82,7 +82,7 @@ class TaskViewerFeatureScreen extends StatelessWidget {
                         children: [
                           SectionHeader(
                             taskStatus: "Late",
-                            taskTotal: state.newTasks.length.toString(),
+                            taskTotal: state.lateTasks.length.toString(),
                             backgroundColor: theme.colorScheme.error.withAlpha(
                               150,
                             ),
@@ -93,7 +93,7 @@ class TaskViewerFeatureScreen extends StatelessWidget {
                             constraints: BoxConstraints(maxHeight: 28.sh),
                             child: ListView.builder(
                               scrollDirection: .horizontal,
-                              itemCount: state.allTasks.length,
+                              itemCount: state.lateTasks.length,
                               itemBuilder: (context, index) =>
                                   LateTaskCard(task: state.allTasks[index]),
                             ),
@@ -115,7 +115,7 @@ class TaskViewerFeatureScreen extends StatelessWidget {
                         children: [
                           SectionHeader(
                             taskStatus: "In Progress",
-                            taskTotal: state.newTasks.length.toString(),
+                            taskTotal: state.inProgressTasks.length.toString(),
                             backgroundColor: AppColors.warning.withAlpha(150),
                             onPressed: () {},
                           ),
@@ -123,7 +123,7 @@ class TaskViewerFeatureScreen extends StatelessWidget {
                           ConstrainedBox(
                             constraints: BoxConstraints(maxHeight: 30.sh),
                             child: ListView.builder(
-                              itemCount: state.newTasks.length,
+                              itemCount: state.inProgressTasks.length,
                               itemBuilder: (context, index) =>
                                   InProgressTaskCard(
                                     task: state.allTasks[index],

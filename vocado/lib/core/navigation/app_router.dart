@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:vocado/core/common/entities/task/task_entity.dart';
+import 'package:vocado/core/services/user_service.dart';
 import 'package:vocado/features/task_creator/presentation/pages/error_screen.dart';
 import 'package:vocado/features/task_creator/presentation/pages/task_review_screen.dart';
 import 'package:vocado/features/task_creator/presentation/pages/voice_screen.dart';
@@ -16,7 +17,8 @@ import 'package:vocado/features/task_viewer/presentation/cubit/task_viewer_cubit
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: Routes.voice,
+    initialLocation: Routes.auth,
+    
     routes: [
       GoRoute(
         path: Routes.splash,
@@ -24,7 +26,6 @@ class AppRouter {
           return Scaffold(body: Center(child: Text("splash screen")));
         }, // SplashScreen
       ),
-
       GoRoute(
         path: Routes.auth,
         builder: (context, state) => BlocProvider(
@@ -32,7 +33,6 @@ class AppRouter {
           child: const AuthFeatureScreen(),
         ),
       ),
-
       GoRoute(
         path: Routes.taskCreator,
         builder: (context, state) => BlocProvider(
@@ -56,7 +56,7 @@ class AppRouter {
       ),
       GoRoute(
         path: Routes.taskReviw,
-        builder: (context, state){
+        builder: (context, state) {
           final task = state.extra as TaskEntity;
           return BlocProvider(
             create: (context) => TaskCreatorCubit(GetIt.I.get()),

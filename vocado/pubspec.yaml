@@ -50,6 +50,7 @@ dev_dependencies:
 flutter:
   assets:
     - assets/animations/
+    - assets/icons/
     - assets/translations/
     - .env
   uses-material-design: true

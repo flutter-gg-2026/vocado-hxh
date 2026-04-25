@@ -14,7 +14,7 @@ class AuthCubit extends Cubit<AuthState> {
     final result = await _authUseCase.getAuth(email: email, password: password);
     result.when(
       (success) {
-        emit(AuthSuccessState());
+        emit(AuthSuccessState(role:success.role));
       },
       (whenError) {
         emit(AuthErrorState(message: whenError.message));
@@ -22,9 +22,5 @@ class AuthCubit extends Cubit<AuthState> {
     );
   }
 
-  @override
-  Future<void> close() {
-    //here is when close cubit
-    return super.close();
-  }
+  
 }

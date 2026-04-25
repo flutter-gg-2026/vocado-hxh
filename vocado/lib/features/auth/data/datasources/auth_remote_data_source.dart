@@ -1,13 +1,13 @@
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:injectable/injectable.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:vocado/core/common/model/user_model/user_model.dart';
 import 'package:vocado/core/services/local_keys_service.dart';
 import 'package:vocado/core/services/user_service.dart';
-import 'package:vocado/features/auth/data/models/auth_model.dart';
 import 'package:vocado/core/errors/network_exceptions.dart';
 
 abstract class BaseAuthRemoteDataSource {
-  Future<void> getAuth({
+  Future<UserModel> getAuth({
       required String email,
       required String password,
     });
@@ -22,7 +22,7 @@ class AuthRemoteDataSource implements BaseAuthRemoteDataSource {
   AuthRemoteDataSource(this._localKeysService, this._supabase,this._userService);
 
   @override
-  Future<void> getAuth({
+  Future<UserModel> getAuth({
       required String email,
       required String password,
     }) async {
@@ -38,6 +38,7 @@ class AuthRemoteDataSource implements BaseAuthRemoteDataSource {
             .single();
         final userModel = UserModel.fromJson(userData);
         _userService.setUser = userModel;
+        return userModel;
       } catch (error) {
         throw FailureExceptions.getException(error);
       }
