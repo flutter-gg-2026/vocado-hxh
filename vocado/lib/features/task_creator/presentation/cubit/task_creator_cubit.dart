@@ -8,8 +8,8 @@ class TaskCreatorCubit extends Cubit<TaskCreatorState> {
   TaskCreatorCubit(this._taskCreatorUseCase) : super(TaskCreatorInitialState());
 
   Future<void> startVoiceMethod() async {
-      print("Cubit startVoiceMethod called");
-  emit(TaskRecordingLoadingState());
+    print("Cubit startVoiceMethod called");
+    emit(TaskRecordingLoadingState());
     final result = await _taskCreatorUseCase.startVoice();
 
     result.fold(
@@ -22,29 +22,25 @@ class TaskCreatorCubit extends Cubit<TaskCreatorState> {
     );
   }
 
- Future<void> stopVoiceMethod() async {
+  Future<void> stopVoiceMethod() async {
     print("Cubit stopVoiceMethod called");
-  emit(TaskRecordingLoadingState());
-  final result =
-      await _taskCreatorUseCase.stopVoice();
- print("2️⃣ UseCase returned");
- 
-  result.fold(
-    (failure) {
-            print("3️⃣ FAILURE: ${failure.message}");
+    emit(TaskRecordingLoadingState());
+    final result = await _taskCreatorUseCase.stopVoice();
+    print("2️⃣ UseCase returned");
 
-      emit(TaskCreatorErrorState(
-        message: failure.message,
-      ));
-    },
-    (task) {
-    
+    result.fold(
+      (failure) {
+        print("3️⃣ FAILURE: ${failure.message}");
+
+        emit(TaskCreatorErrorState(message: failure.message));
+      },
+      (task) {
         print("3️⃣ SUCCESS: ${task.title}");
-         emit(TaskCreatedState(task));
+        emit(TaskCreatedState(task));
+      },
+    );
+  }
 
-    },
-  );
-}
   @override
   Future<void> close() {
     //here is when close cubit

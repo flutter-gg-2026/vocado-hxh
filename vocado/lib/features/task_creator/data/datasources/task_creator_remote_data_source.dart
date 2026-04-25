@@ -4,7 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:vocado/core/common/model/task_model/task_model.dart';
 import 'package:vocado/core/network/dio_client.dart';
-import 'package:vocado/core/network/gemini_method.dart';
+import 'package:vocado/core/services/gemini_service.dart';
 import 'package:vocado/core/network/gladia_method.dart';
 import 'package:vocado/core/errors/network_exceptions.dart';
 import 'package:vocado/core/services/record_service.dart';
@@ -19,8 +19,14 @@ class TaskCreatorRemoteDataSource implements BaseTaskCreatorRemoteDataSource {
   final SupabaseClient _supabase;
   final DioClient _dio;
   final RecordService _recordService;
+  final GeminiService _geminiService;
 
-  TaskCreatorRemoteDataSource(this._dio, this._supabase, this._recordService);
+  TaskCreatorRemoteDataSource(
+    this._dio,
+    this._geminiService,
+    this._supabase,
+    this._recordService,
+  );
 
   @override
   Future<bool> startVoice() async {
@@ -44,16 +50,43 @@ class TaskCreatorRemoteDataSource implements BaseTaskCreatorRemoteDataSource {
 
       final transcript = result['transcription']['full_transcript'];
       print("TRANSCRIPT: $transcript");
-      final geminiResult = await _dio.generateTask(transcript);
-      print("GEMINI RESULT: $geminiResult");
+      print("STEP 1 DONE");
+      final geminiResult = await _geminiService.generateTask(transcript);
 
-      final taskModel = TaskModel.fromJson(geminiResult);
+      final String taskTitle = geminiResult['task'] ?? "New Task";
+      final String assigneeName = geminiResult['assignee_name'] ?? "Unknown";
+      final String dueDate =
+          geminiResult['due_date'] ?? DateTime.now().toIso8601String();
 
-      await _supabase.from('tasks').insert(taskModel.toJson());
+      final userId = await getUserIdByName(assigneeName);
 
-      return taskModel;
+      if (userId == null) {
+        throw Exception("User not found: $assigneeName");
+      }
+
+      final response = await _supabase.from('task').insert({
+        'title': taskTitle,
+        'due_date': dueDate,
+        'user_id': userId,
+      }).select();
+
+      return TaskModel.fromJson(response.first);
     } catch (error) {
       throw FailureExceptions.getException(error);
     }
+  }
+
+  Future<String?> getUserIdByName(String name) async {
+    final response = await _supabase
+        .from('users')
+        .select('id')
+        .ilike('name', name.trim())
+        .maybeSingle();
+
+    if (response == null) {
+      return null;
+    }
+
+    return response['id'];
   }
 }

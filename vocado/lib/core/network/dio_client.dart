@@ -17,7 +17,6 @@ class DioClient {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
           'x-gladia-key': dotenv.env['gladia_key'],
-          'x-gemini-key': dotenv.env['gemini_key'],
         },
       ),
     );
