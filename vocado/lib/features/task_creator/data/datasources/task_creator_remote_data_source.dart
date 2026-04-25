@@ -44,10 +44,14 @@ class TaskCreatorRemoteDataSource implements BaseTaskCreatorRemoteDataSource {
 
       final transcript = result['transcription']['full_transcript'];
       print("TRANSCRIPT: $transcript");
-      final geminiResult = await _dio.generateTask(transcript); 
+      final geminiResult = await _dio.generateTask(transcript);
       print("GEMINI RESULT: $geminiResult");
 
-      return TaskModel.fromJson(geminiResult);
+      final taskModel = TaskModel.fromJson(geminiResult);
+
+      await _supabase.from('tasks').insert(taskModel.toJson());
+
+      return taskModel;
     } catch (error) {
       throw FailureExceptions.getException(error);
     }

@@ -5,7 +5,6 @@ import 'package:vocado/core/common/entities/task/task_entity.dart';
 import 'package:vocado/features/task_creator/presentation/cubit/task_creator_cubit.dart';
 import 'package:vocado/features/task_creator/presentation/widgets/custom_button.dart';
 import 'package:vocado/features/task_creator/presentation/widgets/custom_outline_box.dart';
-import 'package:vocado/core/utils/formatters.dart';
 
 class TaskReviewScreen extends StatelessWidget {
   const TaskReviewScreen({super.key, required this.task});
@@ -21,7 +20,7 @@ class TaskReviewScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(8),
           child: Container(
             decoration: BoxDecoration(
               color: Colors.black,
@@ -63,10 +62,14 @@ class TaskReviewScreen extends StatelessWidget {
             ),
             Gap(30),
             CustomOutlineBox(
-              text: task.assignee == null ? "Not assigned" : task.assignee!,
+              text: task.assignee?.isEmpty ?? true
+                  ? "Not assigned"
+                  : task.assignee!,
             ),
             Gap(16),
-            CustomOutlineBox(text: Formatters.formatDate(task.dueDate)),
+            CustomOutlineBox(
+              text: DateFormat('yyyy-MM-dd').format(task.dueDate),
+            ),
             Gap(30),
             CustomButtonPuple(text: "Approved"),
           ],

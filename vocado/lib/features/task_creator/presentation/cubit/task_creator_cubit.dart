@@ -38,12 +38,7 @@ class TaskCreatorCubit extends Cubit<TaskCreatorState> {
       ));
     },
     (task) {
-       if (task.title.isEmpty) {
-        emit(TaskCreatorErrorState(
-          message: "Empty task returned",
-        ));
-        return;
-      }
+    
         print("3️⃣ SUCCESS: ${task.title}");
          emit(TaskCreatedState(task));
 
