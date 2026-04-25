@@ -68,7 +68,7 @@ class TaskCreatorRemoteDataSource implements BaseTaskCreatorRemoteDataSource {
         'title': taskTitle,
         'due_date': dueDate,
         'user_id': userId,
-      }).select();
+      }).select('id, title, due_date, status, users(name)');
 
       return TaskModel.fromJson(response.first);
     } catch (error) {
