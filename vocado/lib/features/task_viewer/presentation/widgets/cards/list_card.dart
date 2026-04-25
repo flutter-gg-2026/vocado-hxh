@@ -6,13 +6,13 @@ import 'package:vocado/core/extensions/font_extensions.dart';
 import 'package:vocado/core/utils/formatters.dart';
 import 'package:vocado/features/task_viewer/presentation/cubit/task_viewer_cubit.dart';
 
-class InProgressTaskCard extends StatelessWidget {
-  const InProgressTaskCard({super.key, required this.task});
+class ListCard extends StatelessWidget {
+  const ListCard({super.key, required this.task, required this.color});
   final TaskEntity task;
-
+  final Color color;
   @override
   Widget build(BuildContext context) {
-   final theme = Theme.of(context);
+    final theme = Theme.of(context);
     final cubit = context.read<TaskViewerCubit>();
     bool isChecked = false;
     return Container(
@@ -20,7 +20,15 @@ class InProgressTaskCard extends StatelessWidget {
       margin: EdgeInsets.all(10),
       padding: EdgeInsets.all(5),
       decoration: BoxDecoration(
-        color: theme.colorScheme.secondary.withAlpha(60),
+        color: theme.colorScheme.surface,
+        boxShadow: [
+          BoxShadow(
+            color: theme.colorScheme.primary.withAlpha(30),
+            blurRadius: 3,
+            spreadRadius: 0.5,
+            offset: Offset(0, 3),
+          ),
+        ],
         borderRadius: BorderRadius.circular(20),
       ),
       child: ListTile(
@@ -28,7 +36,7 @@ class InProgressTaskCard extends StatelessWidget {
           task.title,
           maxLines: 1,
           overflow: TextOverflow.visible,
-          style: theme.textTheme.titleLarge,
+          style: theme.textTheme.titleSmall,
           softWrap: true,
         ),
         subtitle: Row(
@@ -36,16 +44,16 @@ class InProgressTaskCard extends StatelessWidget {
             ImageIcon(
               AssetImage('assets/icons/image.png'),
               size: 5.sizeSW(min: 24, max: 48),
-              color: theme.colorScheme.tertiary,
+              color: color,
             ),
             Gap(5),
             Text(
-              Formatters.formatDate(task.dueDate),
-              style: theme.textTheme.bodyLarge,
+              Formatters.formatTime(task.dueDate),
+              style: theme.textTheme.bodySmall,
             ),
           ],
         ),
-        trailing:  Checkbox(
+        trailing: Checkbox(
           value: isChecked,
           onChanged: (value) {
             if (value == true) {

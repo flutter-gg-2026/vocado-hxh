@@ -6,36 +6,58 @@ class TaskViewerCubit extends Cubit<TaskViewerState> {
   final TaskViewerUseCase _taskViewerUseCase;
 
   TaskViewerCubit(this._taskViewerUseCase) : super(TaskViewerInitialState());
-
   Future<void> getTaskViewerMethod() async {
+    emit(TaskViewerLoadingState());
     final result = await _taskViewerUseCase.getTaskViewer();
     result.fold(
       (onleft) {
         emit(TaskViewerErrorState(message: onleft.message));
       },
       (onright) {
+        final newTasks = onright
+            .where(
+              (t) => t.status == "New" && t.dueDate.isAfter(DateTime.now()),
+            )
+            .toList();
+        final lateTasks = onright
+            .where(
+              (t) => t.status != "Done" && t.dueDate.isBefore(DateTime.now()),
+            )
+            .toList();
+        final inProgressTask = onright
+            .where(
+              (t) =>
+                  t.status == "In Progress" &&
+                  t.dueDate.isAfter(DateTime.now()),
+            )
+            .toList();
         emit(
           TaskViewerSuccessState(
             allTasks: onright,
-            newTasks: onright.where((t) => t.status == "New").toList(),
-            lateTasks: onright.where((t) => t.status == "Late").toList(),
-            inProgressTasks: onright
-                .where((t) => t.status == "In Progress")
-                .toList(),
+            newTasks: newTasks,
+            lateTasks: lateTasks,
+            inProgressTasks: inProgressTask,
           ),
         );
       },
     );
   }
 
-  Future<void> updateTaskMethod() async {
-    final result = await _taskViewerUseCase.getTaskViewer();
+  Future<void> updateTaskMethod({
+    required int id,
+    required String newStatus,
+  }) async {
+    print("--------1$newStatus");
+    final result = await _taskViewerUseCase.updateTask(
+      id: id,
+      newStatus: newStatus,
+    );
     result.fold(
       (onleft) {
         emit(TaskViewerErrorState(message: onleft.message));
       },
-      (onright) {
-        // emit(TaskViewerSuccessState(tasks: onright));
+      (onright) async {
+        await getTaskViewerMethod();
       },
     );
   }

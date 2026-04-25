@@ -4,5 +4,5 @@ import 'package:vocado/core/errors/failure.dart';
 
 abstract class TaskViewerRepositoryDomain {
   Future<Either<Failure, List<TaskEntity>>> getTaskViewer();
-  Future<Either<Failure, List<TaskEntity>>> updateTask();
+  Future<Either<Failure, bool>> updateTask({required int id,required String newStatus});
 }

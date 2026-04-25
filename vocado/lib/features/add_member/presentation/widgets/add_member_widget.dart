@@ -1,7 +1,7 @@
  import 'package:flutter/material.dart';
 
-class AuthWidget extends StatelessWidget {
-  const AuthWidget({super.key});
+class AddMemberWidget extends StatelessWidget {
+  const AddMemberWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

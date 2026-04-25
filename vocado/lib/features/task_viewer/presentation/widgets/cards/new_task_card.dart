@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:vocado/core/common/entities/task/task_entity.dart';
 import 'package:vocado/core/extensions/font_extensions.dart';
 import 'package:vocado/core/utils/formatters.dart';
+import 'package:vocado/features/task_viewer/presentation/cubit/task_viewer_cubit.dart';
+import 'package:vocado/features/task_viewer/presentation/cubit/task_viewer_state.dart';
 
 class NewTaskCard extends StatelessWidget {
   const NewTaskCard({super.key, required this.task});
@@ -10,9 +13,9 @@ class NewTaskCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<TaskViewerCubit>();
     final theme = Theme.of(context);
-    final taskStatus = {1: "New", 2: "In Progress", 3: "Done", 4: "Late"};
-    int? currentValue;
+    final taskStatus = ["In Progress", "Done"];
     return Container(
       height: 45.sizeSW(min: 161, max: 280),
       width: 60.sizeSW(min: 244, max: 388),
@@ -48,19 +51,24 @@ class NewTaskCard extends StatelessWidget {
             ],
           ),
 
-          DropdownButton(
-            hint: Text("Select Task Status"),
-            value: currentValue,
-            items: taskStatus.entries
-                .map(
-                  (task) => DropdownMenuItem(
-                    value: task.key,
-                    child: Text(task.value),
-                  ),
-                )
-                .toList(),
-            onChanged: (int? value) {
-              currentValue = value;
+          BlocBuilder<TaskViewerCubit, TaskViewerState>(
+            builder: (context, state) {
+              return DropdownButton(
+                hint: Text("Select Task Status"),
+                borderRadius: BorderRadius.circular(20),
+
+                items: taskStatus
+                    .map(
+                      (status) =>
+                          DropdownMenuItem(value: status, child: Text(status)),
+                    )
+                    .toList(),
+                onChanged: (String? value) {
+                  if (value != null) {
+                    cubit.updateTaskMethod(id: task.id, newStatus: value);
+                  }
+                },
+              );
             },
           ),
         ],

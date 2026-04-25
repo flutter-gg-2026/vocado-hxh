@@ -39,9 +39,12 @@ class AuthFeatureScreen extends HookWidget {
                     context.showLoading();
 
                   // Success state
-                  case AuthSuccessState _:
-                    context.go(Routes.taskViewer);
-
+                  case AuthSuccessState state:
+                    if (state.role == "Admin") {
+                      context.go(Routes.taskCreator);
+                    } else {
+                      context.go(Routes.taskViewer);
+                    }
                   // Error state
                   case AuthErrorState _:
                     context.showSnackBar(state.message, isError: true);

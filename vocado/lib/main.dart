@@ -38,7 +38,6 @@ class MainApp extends StatelessWidget {
            themeMode:ThemeMode.light,
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
-          debugShowCheckedModeBanner: true,
         );
       },
     );
