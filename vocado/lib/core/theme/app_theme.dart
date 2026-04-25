@@ -14,6 +14,7 @@ abstract class AppTheme {
       tertiary: AppColors.disabled,
       surface: AppColors.surface,
       error: AppColors.error,
+      
     ),
     scaffoldBackgroundColor: AppColors.background,
     textTheme: AppTextTheme.lightTextTheme,

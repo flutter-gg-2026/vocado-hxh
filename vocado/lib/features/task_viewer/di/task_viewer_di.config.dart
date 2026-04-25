@@ -22,14 +22,6 @@ import 'package:vocado/features/task_viewer/domain/repositories/task_viewer_repo
     as _i476;
 import 'package:vocado/features/task_viewer/domain/use_cases/task_viewer_use_case.dart'
     as _i253;
-import 'package:vocado/features/task_viewer/sub/board/data/datasources/board_remote_data_source.dart'
-    as _i239;
-import 'package:vocado/features/task_viewer/sub/board/data/repositories/board_repository_data.dart'
-    as _i554;
-import 'package:vocado/features/task_viewer/sub/board/domain/repositories/board_repository_domain.dart'
-    as _i403;
-import 'package:vocado/features/task_viewer/sub/board/domain/use_cases/board_use_case.dart'
-    as _i221;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -45,25 +37,13 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i216.UserService>(),
       ),
     );
-    gh.lazySingleton<_i239.BaseBoardRemoteDataSource>(
-      () => _i239.BoardRemoteDataSource(
-        gh<_i140.LocalKeysService>(),
-        gh<_i454.SupabaseClient>(),
-      ),
-    );
     gh.lazySingleton<_i476.TaskViewerRepositoryDomain>(
       () => _i132.TaskViewerRepositoryData(
         gh<_i262.BaseTaskViewerRemoteDataSource>(),
       ),
     );
-    gh.lazySingleton<_i403.BoardRepositoryDomain>(
-      () => _i554.BoardRepositoryData(gh<_i239.BaseBoardRemoteDataSource>()),
-    );
     gh.lazySingleton<_i253.TaskViewerUseCase>(
       () => _i253.TaskViewerUseCase(gh<_i476.TaskViewerRepositoryDomain>()),
-    );
-    gh.lazySingleton<_i221.BoardUseCase>(
-      () => _i221.BoardUseCase(gh<_i403.BoardRepositoryDomain>()),
     );
     return this;
   }

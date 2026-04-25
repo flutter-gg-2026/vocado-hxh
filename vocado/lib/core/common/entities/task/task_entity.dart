@@ -4,7 +4,7 @@ class TaskEntity extends Equatable {
   
   final int id;
   final String title;
-  final String assignee;
+  final String? assignee;
   final DateTime dueDate;
   final String status;
 

@@ -13,15 +13,29 @@ class TaskViewerRepositoryData implements TaskViewerRepositoryDomain {
   final BaseTaskViewerRemoteDataSource remoteDataSource;
 
   TaskViewerRepositoryData(this.remoteDataSource);
-
   @override
   Future<Either<Failure, List<TaskEntity>>> getTaskViewer() async {
     try {
       final response = await remoteDataSource.getTaskViewer();
-              print("-------fffffffffff");
+      print("-------fffffffffff");
 
       final tasks = response.map((task) => task.toEntity()).toList();
-        print("-------fffffffffff");
+      print("-------fffffffffff");
+
+      return Either.right(tasks);
+    } catch (error) {
+      return Either.left(FailureExceptions.getException(error));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<TaskEntity>>> updateTask() async {
+    try {
+      final response = await remoteDataSource.getTaskViewer();
+      print("-------fffffffffff");
+
+      final tasks = response.map((task) => task.toEntity()).toList();
+      print("-------fffffffffff");
 
       return Either.right(tasks);
     } catch (error) {

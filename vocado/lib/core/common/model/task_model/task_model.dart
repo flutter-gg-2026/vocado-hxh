@@ -9,7 +9,7 @@ abstract class TaskModel with _$TaskModel {
   const factory TaskModel({
     required int id,
     required String title,
-    required String assignee,
+    required String? assignee,
     required DateTime dueDate,
     required String status,
   }) = _TaskModel;

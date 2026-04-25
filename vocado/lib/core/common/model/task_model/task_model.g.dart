@@ -9,7 +9,7 @@ part of 'task_model.dart';
 _TaskModel _$TaskModelFromJson(Map<String, dynamic> json) => _TaskModel(
   id: (json['id'] as num).toInt(),
   title: json['title'] as String,
-  assignee: json['assignee'] as String,
+  assignee: json['assignee'] as String?,
   dueDate: DateTime.parse(json['due_date'] as String),
   status: json['status'] as String,
 );
