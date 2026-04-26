@@ -1,91 +1,62 @@
-# 🎙️ VocaDo — Your AI Task Manager  
-### *Transform Voice into Actionable Logic*
+# 🎙️ VocaDo: Your AI-Powered Task Manager
+
+**VocaDo** is a mobile application designed to explore the integration of **Mobile Development** and **Generative AI**. It transforms natural speech into structured, actionable tasks, utilizing an AI-driven pipeline to route work based on user roles.
 
 ---
 
-## 🧠 Project Overview
+## 🛠️ Tech Stack Requirements
 
-**VocaDo** is a mobile application that bridges voice input and task automation using Generative AI.  
-Admins can record voice instructions, which are converted into structured tasks and assigned to users based on roles.
+### 1. Mobile Framework & Architecture
+*   **Flutter & Dart:** The core framework for cross-platform development.
+*   **Clean Architecture:** Organised into `Data`, `Domain`, and `Presentation` layers to ensure scalability.
+*   **BLoC Pattern:** For robust state management and event-driven logic.
 
-The system doesn’t just record speech — it understands and structures it into actionable data.
+### 2. The AI Pipeline (The "Brain" 🧠)
+*   **Speech-to-Text (STT):** Utilising **Gladia API** or **OpenAI Whisper** for high-fidelity audio transcription.
+*   **Natural Language Processing (NLP):** Powered by **Gemini 1.5 Flash** to parse raw text.
+*   **Structured Output:** The AI is engineered to return a strict **JSON** object:
+    ```json
+    { 
+      "task": "Update the design in Figma", 
+      "assignee": "Rasha", 
+      "due_date": "2026-04-23" 
+    }
+    ```
+
+### 3. Role-Based Access Control (RBAC)
+*   **Admin View:** Access to the **Voice Record Page** to capture audio and architect tasks.
+*   **User View:** Access to the **Task Board** and **Task-index** to view and manage assigned work.
 
 ---
 
-## ✨ Key Features
+## 🏗️ Project Roadmap
 
-### 🎤 Voice-to-Task AI
-- Record voice instructions (Admin only)
-- Convert speech to text using STT (Gladia API / Whisper)
-- Parse text into structured JSON using Gemini 1.5 Flash
+### Phase 1: Authentication & Entry Points
+*   Implementation of the `Login Page`.
+*   Logic-gate routing to distinguish between `role: admin` and `role: user`.
+*   Creation of the `Task-index` dashboard showing "New", "Late", and "In Progress" summaries.
 
-### 🧠 AI Output Example
-```json
-{
-  "task": "Update the design in Figma",
-  "assignee": "Rasha",
-  "due_date": "2026-04-23"
-}
-👥 Role-Based Access Control (RBAC)
-Admin
-Record voice tasks
-Trigger AI processing
-Approve generated tasks
-User
-View assigned tasks
-Track task status
-📊 Task Dashboard
-🆕 New Tasks
-⏳ In Progress Tasks
-🔴 Late Tasks
-🏗️ Architecture
+### Phase 2: Voice Command Center (Admin)
+*   Integration of the `record` package for high-quality audio capture.
+*   Implementation of pulse animations for visual feedback during recording.
+*   Development of "Opps!" error handling screens.
+
+### Phase 3: AI Orchestration
+*   Connecting the STT API to receive text transcripts.
+*   System Prompt engineering for Gemini to ensure consistent JSON formatting.
+*   Development of a **Task Confirmation** screen for manual verification before approval.
+
+### Phase 4: State Management
+*   Full implementation of **BLoC** to manage states: `Recording` ➔ `Transcribing` ➔ `Parsing` ➔ `Success`.
+
+---
+
+## 📂 Folder Structure
+```text
 lib/
- ├── core/              # DI, networking, error handling
+ ├── core/              # Network info, DI (Get_it), Error handling
  ├── features/
- │   ├── auth/          # Login & RBAC logic
- │   ├── task_creator/  # Voice + AI pipeline (Admin)
- │   └── task_viewer/   # Task dashboard (User)
+ │   ├── auth/          # Login & Role Logic
+ │   ├── task_creator/  # Admin: Record & AI Process
+ │   └── task_viewer/   # User: Task List & Details
  └── main.dart
-⚙️ Tech Stack
-Mobile
-Flutter
-Dart
-BLoC (State Management)
-GetIt (Dependency Injection)
-AI Pipeline
-Speech-to-Text: Gladia API / OpenAI Whisper
-LLM: Gemini 1.5 Flash
-Prompt Engineering (JSON structured output)
-🚀 Project Roadmap
-Phase 1: Auth & Roles
-Login screen
-Role-based routing (Admin / User)
-Dashboard
-Phase 2: Voice Feature (Admin)
-Audio recording
-Mic animation (pulse effect)
-Error handling screen
-Phase 3: AI Processing
-Audio → STT
-Transcript → Gemini
-JSON → Task model
-Admin approval screen
-Phase 4: State Management (BLoC Flow)
-Recording → Transcribing → Parsing → Success / Error
-🎨 UI Design
-
-Figma Link:
-https://www.figma.com/design/orIarysJ6qilKJgHukQfgH/Untitled?node-id=0-1&t=oePpVXgvCfdIXwS2-1
-
-🎯 Goal
-
-To build an AI-powered task management system where voice becomes structured action automatically.
-
-✨ Final Note
-
-VocaDo demonstrates real-world integration of:
-
-AI + Mobile Development
-Clean Architecture
-Role-Based Systems
-Voice Processing Pipelines
