@@ -40,7 +40,24 @@ class TaskCreatorCubit extends Cubit<TaskCreatorState> {
       },
     );
   }
+ Future<void> getAllTasks() async {
+    emit(TaskRecordingLoadingState());
 
+    final result = await _taskCreatorUseCase.getAllTask();
+
+    result.fold(
+      (failure) {
+              print("❌ ERROR: ${failure.message}");
+
+        emit(TaskCreatorErrorState(message: failure.message));
+      },
+      (tasks) {
+              print("✅ TASKS LENGTH: ${tasks.length}");
+
+        emit(TaskCreatorSuccessState(tasks));
+      },
+    );
+  }
   @override
   Future<void> close() {
     //here is when close cubit

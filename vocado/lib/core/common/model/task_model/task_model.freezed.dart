@@ -213,7 +213,7 @@ return $default(_that.id,_that.title,_that.assignee,_that.dueDate,_that.status);
 
 @JsonSerializable(fieldRename: .snake)
 class _TaskModel implements TaskModel {
-  const _TaskModel({required this.id, required this.title, required this.assignee, required this.dueDate, required this.status});
+  const _TaskModel({required this.id, required this.title, this.assignee, required this.dueDate, required this.status});
   factory _TaskModel.fromJson(Map<String, dynamic> json) => _$TaskModelFromJson(json);
 
 @override final  int id;

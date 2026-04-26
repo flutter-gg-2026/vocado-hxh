@@ -13,6 +13,7 @@ class AuthCubit extends Cubit<AuthState> {
   }) async {
     emit(AuthLoadingState());
     final result = await _authUseCase.getAuth(email: email, password: password);
+    
     result.when(
       (success) {
         emit(AuthSuccessState(role: success.role));

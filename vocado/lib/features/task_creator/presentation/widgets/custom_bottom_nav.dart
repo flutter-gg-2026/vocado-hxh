@@ -3,10 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:vocado/core/navigation/routers.dart';
 
 class CustomBottomNav extends StatelessWidget {
-  const CustomBottomNav({
-    super.key,
-    required this.currentIndex,
-  });
+  const CustomBottomNav({super.key, required this.currentIndex});
 
   final int currentIndex;
 
@@ -19,31 +16,26 @@ class CustomBottomNav extends StatelessWidget {
       selectedItemColor: Colors.purple,
       unselectedItemColor: Colors.grey,
       items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.mic),
-          label: 'Team',
-        ),
+        BottomNavigationBarItem(icon: Icon(Icons.people), label: 'Team'),
+        BottomNavigationBarItem(icon: Icon(Icons.mic), label: 'Record'),
         BottomNavigationBarItem(
           icon: Icon(Icons.view_list),
           label: 'Task Boards',
         ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          label: 'Profile',
-        ),
+        BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
       ],
       onTap: (index) {
         switch (index) {
           case 0:
-            context.go(Routes.voice);
+            context.go(Routes.addMember);
             break;
           case 1:
+            context.go(Routes.voice);
+
             break;
           case 2:
+            context.go(Routes.taskCreator);
+
             break;
           case 3:
             break;

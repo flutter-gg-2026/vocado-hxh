@@ -11,7 +11,6 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
-import 'package:supabase_flutter/supabase_flutter.dart' as _i454;
 import 'package:vocado/core/services/local_keys_service.dart' as _i140;
 import 'package:vocado/core/services/user_service.dart' as _i216;
 import 'package:vocado/features/auth/data/datasources/auth_remote_data_source.dart'
@@ -33,7 +32,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i906.BaseAuthRemoteDataSource>(
       () => _i906.AuthRemoteDataSource(
         gh<_i140.LocalKeysService>(),
-        gh<_i454.SupabaseClient>(),
         gh<_i216.UserService>(),
       ),
     );

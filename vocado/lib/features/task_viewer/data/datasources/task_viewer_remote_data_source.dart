@@ -12,15 +12,11 @@ abstract class BaseTaskViewerRemoteDataSource {
 
 @LazySingleton(as: BaseTaskViewerRemoteDataSource)
 class TaskViewerRemoteDataSource implements BaseTaskViewerRemoteDataSource {
-  final SupabaseClient _supabase;
+  final _supabase = Supabase.instance.client;
   final UserService _userService;
   final LocalKeysService _localKeysService;
 
-  TaskViewerRemoteDataSource(
-    this._localKeysService,
-    this._supabase,
-    this._userService,
-  );
+  TaskViewerRemoteDataSource(this._localKeysService, this._userService);
 
   @override
   Future<List<TaskModel>> getTaskViewer() async {

@@ -10,10 +10,9 @@ abstract class BaseAddMemberRemoteDataSource {
 
 @LazySingleton(as: BaseAddMemberRemoteDataSource)
 class AddMemberRemoteDataSource implements BaseAddMemberRemoteDataSource {
-  final SupabaseClient _supabase;
-  final LocalKeysService _localKeysService;
+final _supabase = Supabase.instance.client;  final LocalKeysService _localKeysService;
 
-  AddMemberRemoteDataSource(this._localKeysService, this._supabase);
+  AddMemberRemoteDataSource(this._localKeysService);
 
   @override
   Future<AddMemberModel> getAddMember() async {

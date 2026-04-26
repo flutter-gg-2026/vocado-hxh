@@ -11,7 +11,6 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
-import 'package:supabase_flutter/supabase_flutter.dart' as _i454;
 import 'package:vocado/core/network/dio_client.dart' as _i856;
 import 'package:vocado/core/services/gemini_service.dart' as _i443;
 import 'package:vocado/core/services/record_service.dart' as _i630;
@@ -35,7 +34,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i332.TaskCreatorRemoteDataSource(
         gh<_i856.DioClient>(),
         gh<_i443.GeminiService>(),
-        gh<_i454.SupabaseClient>(),
         gh<_i630.RecordService>(),
       ),
     );

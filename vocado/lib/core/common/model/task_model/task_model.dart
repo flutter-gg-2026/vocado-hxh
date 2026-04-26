@@ -9,17 +9,13 @@ abstract class TaskModel with _$TaskModel {
   const factory TaskModel({
     required int id,
     required String title,
-    @JsonKey(readValue: _readAssignee) required String? assignee,
+    String? assignee,
     required DateTime dueDate,
     required String status,
   }) = _TaskModel;
 
-  factory TaskModel.fromJson(Map<String, Object?> json) =>
-      _$TaskModelFromJson(json);
-
-  static String? _readAssignee(Map json, String key) {
-    return json['users']?['name'];
-  }
+factory TaskModel.fromJson(Map<String, Object?> json)
+      => _$TaskModelFromJson(json);
 }
 
 extension TaskModelMapper on TaskModel {

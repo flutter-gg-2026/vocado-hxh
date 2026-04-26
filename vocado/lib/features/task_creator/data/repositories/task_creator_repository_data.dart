@@ -45,4 +45,19 @@ class TaskCreatorRepositoryData
       );
     }
   }
+  @override
+Future<Either<Failure, List<TaskEntity>>> getAllTask() async {
+  try {
+    final response = await remoteDataSource.getAllTask();
+
+    return Right(
+      response.map((e) => e.toEntity()).toList(),
+    );
+
+  } catch (error) {
+    return Left(
+      FailureExceptions.getException(error),
+    );
+  }
+}
 }

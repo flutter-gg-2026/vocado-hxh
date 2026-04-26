@@ -39,7 +39,7 @@ class AppRouter {
       GoRoute(
         path: Routes.taskCreator,
         builder: (context, state) => BlocProvider(
-          create: (context) => TaskCreatorCubit(GetIt.I.get()),
+          create: (context) => TaskCreatorCubit(GetIt.I.get())..getAllTasks(),
           child: const TaskCreatorFeatureScreen(),
         ),
       ),

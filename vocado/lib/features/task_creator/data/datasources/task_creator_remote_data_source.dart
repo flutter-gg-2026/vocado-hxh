@@ -12,19 +12,19 @@ import 'package:vocado/core/services/record_service.dart';
 abstract class BaseTaskCreatorRemoteDataSource {
   Future<bool> startVoice();
   Future<TaskModel> stopVoice();
+Future<List<TaskModel>> getAllTask();
 }
 
 @LazySingleton(as: BaseTaskCreatorRemoteDataSource)
 class TaskCreatorRemoteDataSource implements BaseTaskCreatorRemoteDataSource {
-  final SupabaseClient _supabase;
-  final DioClient _dio;
+final SupabaseClient _supabase = Supabase.instance.client;
+ final DioClient _dio;
   final RecordService _recordService;
   final GeminiService _geminiService;
 
   TaskCreatorRemoteDataSource(
     this._dio,
     this._geminiService,
-    this._supabase,
     this._recordService,
   );
 
@@ -89,4 +89,21 @@ class TaskCreatorRemoteDataSource implements BaseTaskCreatorRemoteDataSource {
 
     return response['id'];
   }
+
+ @override
+Future<List<TaskModel>> getAllTask() async {
+  try {
+    final response = await _supabase
+        .from('task')
+        .select('id, title, due_date, status, users(name)');
+
+    return (response as List)
+        .map((e) => TaskModel.fromJson(e))
+        .toList();
+
+  } catch (error) {
+    throw FailureExceptions.getException(error);
+  }
+}
+
 }

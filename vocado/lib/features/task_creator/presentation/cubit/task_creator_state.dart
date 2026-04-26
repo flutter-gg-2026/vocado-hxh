@@ -9,8 +9,15 @@ abstract class TaskCreatorState extends Equatable {
 }
 
 class TaskCreatorInitialState extends TaskCreatorState {}
-class TaskCreatorSuccessState extends TaskCreatorState {}
+
+class TaskCreatorSuccessState extends TaskCreatorState {
+  final List<TaskEntity> tasks;
+
+  const TaskCreatorSuccessState(this.tasks);
+}
+
 class TaskRecordingLoadingState extends TaskCreatorState {}
+
 class TaskRecordingState extends TaskCreatorState {
   final String? text;
   final bool start;
@@ -20,15 +27,16 @@ class TaskRecordingState extends TaskCreatorState {
   @override
   List<Object?> get props => [start, text];
 }
+
 class TaskCreatedState extends TaskCreatorState {
   final TaskEntity task;
 
   const TaskCreatedState(this.task);
 }
+
 class TaskCreatorErrorState extends TaskCreatorState {
   final String message;
   const TaskCreatorErrorState({required this.message});
   @override
   List<Object?> get props => [message];
 }
-
