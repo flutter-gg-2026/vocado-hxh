@@ -15,6 +15,13 @@ class ViewMemberRemoteDataSource implements BaseViewMemberRemoteDataSource {
 
   ViewMemberRemoteDataSource(this._localKeysService, this._supabase);
 
+  /// Fetches all users from Supabase except Admins.
+  /// Returns a list of [UserModel].
+  ///
+  /// - Queries the "users" table
+  /// - Excludes users with role = "Admin"
+  /// - Maps raw JSON response into UserModel objects
+  /// - Throws [FailureExceptions] if any error occurs
   Future<List<UserModel>> getMember() async {
     List<UserModel> users = [];
     try {

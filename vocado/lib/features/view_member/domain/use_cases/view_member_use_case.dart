@@ -1,4 +1,4 @@
-import 'package:multiple_result/multiple_result.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
 import 'package:vocado/core/common/entities/user/user_entity.dart';
 import 'package:vocado/core/errors/failure.dart';
@@ -10,8 +10,7 @@ class ViewMemberUseCase {
   final ViewMemberRepositoryDomain _repositoryData;
 
   ViewMemberUseCase(this._repositoryData);
-
-   Future<Result<List<UserEntity>, Failure>> getMember() async {
+Future<Either<Failure,List<UserEntity>>> getMember() async {
     return _repositoryData.getMember();
   }
 }

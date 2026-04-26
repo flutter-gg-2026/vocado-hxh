@@ -6,17 +6,17 @@ class ViewMemberCubit extends Cubit<ViewMemberState> {
   final ViewMemberUseCase _viewMemberUseCase;
 
   ViewMemberCubit(this._viewMemberUseCase) : super(ViewMemberInitialState()) {
-    getViewMemberMethod();
+    viewMemberMethod();
   }
 
-  Future<void> getViewMemberMethod() async {
+  Future<void> viewMemberMethod() async {
     final result = await _viewMemberUseCase.getMember();
-    result.when(
-      (success) {
-        emit(ViewMemberSuccessState(users: success));
+    result.fold(
+      (onLeft) {
+        emit(ViewMemberErrorState(message: onLeft.message));
       },
-      (whenError) {
-        emit(ViewMemberErrorState(message: whenError.message));
+      (onRight) {
+        emit(ViewMemberSuccessState(users: onRight));
       },
     );
   }

@@ -1,5 +1,5 @@
+import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
-import 'package:multiple_result/multiple_result.dart';
 import 'package:vocado/core/common/entities/user/user_entity.dart';
 import 'package:vocado/core/common/model/user_model/user_model.dart';
 import 'package:vocado/core/errors/network_exceptions.dart';
@@ -14,14 +14,15 @@ class ViewMemberRepositoryData implements ViewMemberRepositoryDomain {
 
   ViewMemberRepositoryData(this.remoteDataSource);
 
-  Future<Result<List<UserEntity>, Failure>> getMember() async {
+  @override
+  Future<Either<Failure,List<UserEntity>>> getMember() async {
     try {
       final response = await remoteDataSource.getMember();
       final users = response.map((u) => u.toEntity()).toList();
 
-      return Success(users);
+      return Either.right(users);
     } catch (error) {
-      return Error(FailureExceptions.getException(error));
+      return Either.left(FailureExceptions.getException(error));
     }
   }
 }
