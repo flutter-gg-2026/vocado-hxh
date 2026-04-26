@@ -15,6 +15,7 @@ class ViewMemberFeatureScreen extends StatelessWidget {
     final _ = context.read<ViewMemberCubit>();
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(title: const Text('Team')),
 
       body: SafeArea(

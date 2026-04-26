@@ -4,9 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:vocado/core/navigation/routers.dart';
 import 'package:vocado/features/task_creator/presentation/cubit/task_creator_cubit.dart';
 import 'package:vocado/features/task_creator/presentation/cubit/task_creator_state.dart';
-import 'package:vocado/features/task_creator/presentation/pages/task_review_screen.dart';
 import 'package:vocado/features/task_creator/presentation/widgets/custom_bottom_nav.dart';
-import 'package:lottie/lottie.dart';
+
 
 class VoiceScreen extends StatelessWidget {
   const VoiceScreen({super.key});
@@ -123,12 +122,6 @@ class VoiceScreen extends StatelessWidget {
                                       color: Colors.white,
                                       size: 40,
                                     ),
-                              // child: value
-                              //     ? Lottie.asset(
-                              //         "assets/animations/search_mic_wave.json",
-                              //         repeat: true,
-                              //       )
-                              //     : Icon(Icons.mic),
                             );
                           },
                         ),

@@ -2,7 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:vocado/core/common/entities/task/task_entity.dart';
+import 'package:vocado/core/navigation/routers.dart';
 import 'package:vocado/features/task_creator/presentation/cubit/task_creator_cubit.dart';
 import 'package:vocado/features/task_creator/presentation/widgets/custom_button.dart';
 import 'package:vocado/features/task_creator/presentation/widgets/custom_outline_box.dart';
@@ -72,7 +74,9 @@ class TaskReviewScreen extends StatelessWidget {
               text: DateFormat('yyyy-MM-dd').format(task.dueDate),
             ),
             Gap(30),
-            CustomButtonPuple(text: "Approved"),
+            CustomButtonPuple(text: "Approved", onPressed: () {
+              context.go(Routes.voice);
+            },),
           ],
         ),
       ),

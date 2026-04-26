@@ -69,7 +69,7 @@ class TaskCreatorRemoteDataSource implements BaseTaskCreatorRemoteDataSource {
         'title': taskTitle,
         'due_date': dueDate,
         'user_id': userId,
-      }).select('id, title, due_date, status, users(name)');
+      }).select();
 
       return TaskModel.fromJson(response.first);
     } catch (error) {
@@ -96,7 +96,7 @@ Future<List<TaskModel>> getAllTask() async {
   try {
     final response = await _supabase
         .from('task')
-        .select('id, title, due_date, status, users(name)');
+        .select();
 
     return (response as List)
         .map((e) => TaskModel.fromJson(e))
