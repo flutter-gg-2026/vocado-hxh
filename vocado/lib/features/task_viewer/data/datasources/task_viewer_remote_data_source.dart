@@ -22,6 +22,13 @@ class TaskViewerRemoteDataSource implements BaseTaskViewerRemoteDataSource {
     this._userService,
   );
 
+  /// Fetches all tasks assigned to the currently logged-in user.
+  ///
+  /// - Queries the "task" table in Supabase
+  /// - Filters tasks using the current user's ID
+  /// - Converts JSON response into a list of [TaskModel]
+  /// - Returns an empty list if no tasks are found
+  /// - Throws [FailureExceptions] if an error occurs
   @override
   Future<List<TaskModel>> getTaskViewer() async {
     List<TaskModel> tasks = [];
@@ -42,15 +49,16 @@ class TaskViewerRemoteDataSource implements BaseTaskViewerRemoteDataSource {
     }
   }
 
+  /// Updates the status of a specific task.
+  ///
+  /// - Finds task by its "id"
+  /// - Updates only the "status" field in Supabase
+  /// - Returns true if update succeeds
+  /// - Throws [FailureExceptions] if update fails
   @override
   Future<bool> updateTask({required int id, required String newStatus}) async {
     try {
-      final response = await _supabase
-          .from("task")
-          .update({'status': newStatus})
-          .eq("id", id);
-      print("---------------1");
-      print(response);
+      await _supabase.from("task").update({'status': newStatus}).eq("id", id);
       return true;
     } catch (error) {
       throw FailureExceptions.getException(error);

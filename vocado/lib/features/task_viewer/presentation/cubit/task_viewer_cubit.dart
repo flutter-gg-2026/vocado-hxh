@@ -6,6 +6,13 @@ class TaskViewerCubit extends Cubit<TaskViewerState> {
   final TaskViewerUseCase _taskViewerUseCase;
 
   TaskViewerCubit(this._taskViewerUseCase) : super(TaskViewerInitialState());
+
+  /// Fetches all tasks for the current user and categorizes them into:
+  /// - New tasks (not overdue)
+  /// - Late tasks (past due date and not done)
+  /// - In-progress tasks (currently being worked on and not overdue)
+  ///
+  /// Emits loading, error, or success states depending on the result.
   Future<void> getTaskViewerMethod() async {
     emit(TaskViewerLoadingState());
     final result = await _taskViewerUseCase.getTaskViewer();
@@ -43,11 +50,17 @@ class TaskViewerCubit extends Cubit<TaskViewerState> {
     );
   }
 
+  /// Updates the status of a specific task in the database.
+  ///
+  /// After a successful update, it refreshes the task list by calling
+  /// [getTaskViewerMethod] to ensure the UI reflects the latest data.
+  ///
+  /// Emits an error state if the update fails.
+
   Future<void> updateTaskMethod({
     required int id,
     required String newStatus,
   }) async {
-    print("--------1$newStatus");
     final result = await _taskViewerUseCase.updateTask(
       id: id,
       newStatus: newStatus,

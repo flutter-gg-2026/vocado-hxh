@@ -27,7 +27,7 @@ class CustomBottomNav extends StatelessWidget {
       onTap: (index) {
         switch (index) {
           case 0:
-            context.go(Routes.addMember);
+            context.go(Routes.viewMember);
             break;
           case 1:
             context.go(Routes.voice);
