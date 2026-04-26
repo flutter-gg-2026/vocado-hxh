@@ -12,6 +12,9 @@ Admins can record voice instructions, which are converted into structured tasks 
 The system doesn’t just record speech — it understands and structures it into actionable data.
 
 ---
+## ScreenRecord
+https://github.com/user-attachments/assets/a0b8f555-3dfb-498f-99df-62e1253f13f3
+
 
 ## ✨ Key Features
 
