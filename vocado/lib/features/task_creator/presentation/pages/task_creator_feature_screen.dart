@@ -17,7 +17,6 @@ class TaskCreatorFeatureScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            /// 🔝 HEADER
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               child: Row(
@@ -35,8 +34,6 @@ class TaskCreatorFeatureScreen extends StatelessWidget {
                 ],
               ),
             ),
-
-            /// 🧩 TABS (UI only for now)
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
@@ -53,10 +50,7 @@ class TaskCreatorFeatureScreen extends StatelessWidget {
                 ],
               ),
             ),
-
             const Gap(20),
-
-            /// 🔤 TITLE ROW
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
@@ -77,21 +71,14 @@ class TaskCreatorFeatureScreen extends StatelessWidget {
                 ],
               ),
             ),
-
             const Gap(15),
-
-            /// 🔥 TASK LIST (CONNECTED TO CUBIT)
             Expanded(
               child: BlocBuilder<TaskCreatorCubit, TaskCreatorState>(
                 builder: (context, state) {
                      print("STATE: $state");
-
-                  /// ⏳ LOADING
                   if (state is TaskRecordingLoadingState) {
                     return const Center(child: CircularProgressIndicator());
                   }
-
-                  /// ❌ ERROR
                   if (state is TaskCreatorErrorState) {
                     return Center(
                       child: Text(
@@ -100,15 +87,12 @@ class TaskCreatorFeatureScreen extends StatelessWidget {
                       ),
                     );
                   }
-
-                  /// ✅ SUCCESS
                   if (state is TaskCreatorSuccessState) {
                     final tasks = state.tasks;
 
                     if (tasks.isEmpty) {
                       return const Center(child: Text("No tasks yet"));
                     }
-
                     return RefreshIndicator(
                       onRefresh: () async {
                         context.read<TaskCreatorCubit>().getAllTasks();
@@ -118,7 +102,6 @@ class TaskCreatorFeatureScreen extends StatelessWidget {
                         itemCount: tasks.length,
                         itemBuilder: (context, index) {
                           final task = tasks[index];
-
                           return Padding(
                             padding: const EdgeInsets.only(bottom: 12),
                             child: CustomTaskCard(
@@ -133,8 +116,6 @@ class TaskCreatorFeatureScreen extends StatelessWidget {
                       ),
                     );
                   }
-
-                  /// 💤 INITIAL
                   return const SizedBox();
                 },
               ),
@@ -142,8 +123,6 @@ class TaskCreatorFeatureScreen extends StatelessWidget {
           ],
         ),
       ),
-
-      /// 🔻 BOTTOM NAV
       bottomNavigationBar: const CustomBottomNav(currentIndex: 2),
     );
   }

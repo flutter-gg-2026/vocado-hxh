@@ -17,14 +17,15 @@ Future<List<TaskModel>> getAllTask();
 
 @LazySingleton(as: BaseTaskCreatorRemoteDataSource)
 class TaskCreatorRemoteDataSource implements BaseTaskCreatorRemoteDataSource {
-final SupabaseClient _supabase = Supabase.instance.client;
- final DioClient _dio;
+  final SupabaseClient _supabase;
+  final DioClient _dio;
   final RecordService _recordService;
   final GeminiService _geminiService;
 
   TaskCreatorRemoteDataSource(
     this._dio,
     this._geminiService,
+    this._supabase,
     this._recordService,
   );
 
