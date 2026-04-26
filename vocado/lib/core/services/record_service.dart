@@ -24,11 +24,7 @@ class RecordService {
     final name = UuidV7().generate();
 
     await _record.start(
-      const RecordConfig(
-        encoder: AudioEncoder.aacLc,
-        bitRate: 128000,
-        sampleRate: 44100,
-      ),
+      const RecordConfig(),
       path: '${tempDir.path}/$name.m4a',
     );
   }
