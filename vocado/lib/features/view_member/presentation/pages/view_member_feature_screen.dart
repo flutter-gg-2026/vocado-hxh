@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vocado/core/widgets/buttons/custom_button.dart';
+import 'package:vocado/features/task_creator/presentation/widgets/custom_bottom_nav.dart';
 import 'package:vocado/features/view_member/presentation/cubit/view_member_cubit.dart';
 import 'package:vocado/features/view_member/presentation/cubit/view_member_state.dart';
 import 'package:vocado/features/view_member/presentation/widgets/user_card.dart';
@@ -14,9 +15,7 @@ class ViewMemberFeatureScreen extends StatelessWidget {
     final _ = context.read<ViewMemberCubit>();
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Team'),
-      ),
+      appBar: AppBar(title: const Text('Team')),
 
       body: SafeArea(
         child: Padding(
@@ -40,22 +39,18 @@ class ViewMemberFeatureScreen extends StatelessWidget {
                     ),
 
                     // Button to add a new member
-                    CustomButton(
-                      title: "Add Member",
-                      onPressed: () {},
-                    ),
+                    CustomButton(title: "Add Member", onPressed: () {}),
                   ],
                 );
               }
 
               // Fallback UI for error or other states
-              return const Center(
-                child: Text("Error"),
-              );
+              return const Center(child: Text("Error"));
             },
           ),
         ),
       ),
+      bottomNavigationBar: const CustomBottomNav(currentIndex: 0),
     );
   }
 }

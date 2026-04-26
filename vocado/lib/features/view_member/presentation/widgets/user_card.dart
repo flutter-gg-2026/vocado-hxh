@@ -17,7 +17,7 @@ class UserCard extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Container(
-      height: 45.sizeSW(min: 161, max: 280),
+      height: 55.sizeSW(min: 161, max: 280),
 
       width: 60.sizeSW(min: 244, max: 388),
 
