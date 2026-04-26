@@ -4,7 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:vocado/features/auth/di/auth_di.dart';
 import 'package:vocado/features/task_creator/di/task_creator_di.dart';
 import 'package:vocado/features/task_viewer/di/task_viewer_di.dart';
-import 'package:vocado/features/add_member/di/add_member_di.dart';
+import 'package:vocado/features/view_member/di/view_member_di.dart';
 
 @InjectableInit(
   initializerName: 'init', 
@@ -19,5 +19,5 @@ Future<void> configureDependencies() async {
     configureAuth(getIt);
     configureTaskCreator(getIt);
     configureTaskViewer(getIt);
-    configureAddMember(getIt);
+    configureViewMember(getIt);
 }

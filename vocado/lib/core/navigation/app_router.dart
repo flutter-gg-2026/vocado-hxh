@@ -14,9 +14,8 @@ import 'package:vocado/features/task_creator/presentation/pages/task_creator_fea
 import 'package:vocado/features/task_creator/presentation/cubit/task_creator_cubit.dart';
 import 'package:vocado/features/task_viewer/presentation/pages/task_viewer_feature_screen.dart';
 import 'package:vocado/features/task_viewer/presentation/cubit/task_viewer_cubit.dart';
-import 'package:vocado/features/add_member/presentation/pages/add_member_feature_screen.dart';
-import 'package:vocado/features/add_member/presentation/cubit/add_member_cubit.dart';
-
+import 'package:vocado/features/view_member/presentation/pages/view_member_feature_screen.dart';
+import 'package:vocado/features/view_member/presentation/cubit/view_member_cubit.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -87,15 +86,15 @@ class AppRouter {
           );
         },
       ),
-    
-  GoRoute(
-    path: Routes.addMember,
-    builder: (context, state) => BlocProvider(
-          create: (context) => AddMemberCubit(GetIt.I.get()),
-          child: const AddMemberFeatureScreen(),
+
+      GoRoute(
+        path: Routes.viewMember,
+        builder: (context, state) => BlocProvider(
+          create: (context) => ViewMemberCubit(GetIt.I.get()),
+          child: const ViewMemberFeatureScreen(),
         ),
-  ),
-],
+      ),
+    ],
 
     errorBuilder: (context, state) =>
         Scaffold(body: Center(child: Text('Page not found: ${state.uri}'))),

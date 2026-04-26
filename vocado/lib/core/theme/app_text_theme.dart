@@ -34,7 +34,7 @@ abstract class AppTextTheme {
       color: AppColors.textPrimary,
     ),
     bodyMedium: TextStyle(
-      fontSize: 14,
+      fontSize: 16,
       fontWeight: FontWeight.normal,
       color: AppColors.textSecondary,
     ),

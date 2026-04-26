@@ -45,12 +45,10 @@ class TaskViewerRemoteDataSource implements BaseTaskViewerRemoteDataSource {
   @override
   Future<bool> updateTask({required int id, required String newStatus}) async {
     try {
-      final response = await _supabase
+       await _supabase
           .from("task")
           .update({'status': newStatus})
           .eq("id", id);
-      print("---------------1");
-      print(response);
       return true;
     } catch (error) {
       throw FailureExceptions.getException(error);
